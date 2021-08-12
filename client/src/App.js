@@ -19,7 +19,6 @@ function App() {
     latitude: "-117.7362203",
   });
   const [objList, setObjList] = useState({ state: "loading" });
-  const [plotData, setPlotData] = useState({ state: "loading" });
 
   const theme = createTheme({
     palette: {
@@ -46,7 +45,7 @@ function App() {
       });
       const data = await res.json();
       console.log(data);
-      setPlotData(JSON.parse(data[0].plot.replaceAll("'", '"')));
+
       setObjList(data);
     };
     fetchDSO();
@@ -64,7 +63,7 @@ function App() {
       });
       const data = await res.json();
       console.log(data);
-      setPlotData(JSON.parse(data[0].plot.replaceAll("'", '"')));
+
       setObjList(data);
     };
     refetchDSO();
@@ -110,7 +109,7 @@ function App() {
         </Tooltip>
         <Location locationSelection={locationSelection} />
         <Calendar dateSelection={dateSelection} />
-        <DSOList objList={objList} plotData={plotData} />
+        <DSOList objList={objList} />
       </Container>
     </ThemeProvider>
   );

@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
+import DSOChart from "./DSOChart";
 
 const cardHeight = 180;
 
@@ -78,7 +79,9 @@ export default function DSORow(props) {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Paper className={classes.chart}>
-            {/* <Recharts axisColor={props.axisColor} plot={plotData} /> */}
+            <DSOChart
+              plot={JSON.parse(props.dso?.plot?.replaceAll("'", '"'))}
+            />
           </Paper>
         </Grid>
       </Grid>

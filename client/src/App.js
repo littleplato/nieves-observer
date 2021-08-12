@@ -81,6 +81,7 @@ function App() {
       ...locationData,
     });
     positionUpdate(newObservatoryPosition);
+    setObjList({ state: "loading" });
   };
 
   const dateSelection = (dateData) => {
@@ -94,6 +95,7 @@ function App() {
       date: dateData,
     });
     positionUpdate(newObservatoryPosition);
+    setObjList({ state: "loading" });
   };
 
   return (

@@ -7,15 +7,14 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
-export default function Calendar() {
+export default function Calendar(props) {
   const [selectedDate, setSelectedDate] = React.useState(
     new Date().toISOString().slice(0, 10)
   );
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    console.log(`${date.toISOString().slice(0, 10)} 00:00:00`);
-    // pass this to useEffect
+    setSelectedDate(`${date.toISOString().slice(0, 10)} 00:00:00`);
+    props.dateSelection(selectedDate);
   };
 
   return (

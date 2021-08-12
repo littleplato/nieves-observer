@@ -10,10 +10,16 @@ import NightsStayIcon from "@material-ui/icons/NightsStay";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [observatoryPosition, setObservatoryPosition] = useState({
+    date: "2021-08-11 00:00:00",
+    longitude: "33.5573234",
+    latitude: "-117.7362203",
+  });
 
   const theme = createTheme({
     palette: {
       type: darkMode === true ? "dark" : "light",
+      primary: { main: darkMode === true ? "#90a4ae" : "#455a64" },
     },
     typography: {
       fontFamily: "Quicksand",
@@ -32,7 +38,11 @@ function App() {
         <IconButton onClick={() => setDarkMode(!darkMode)}>
           {darkMode === true ? <WbSunnyIcon /> : <NightsStayIcon />}
         </IconButton>
-        <Calendar />
+        <Calendar
+          dateSelection={(data) =>
+            setObservatoryPosition({ ...observatoryPosition, time: data })
+          }
+        />
       </Container>
     </ThemeProvider>
   );

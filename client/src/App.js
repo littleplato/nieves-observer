@@ -31,6 +31,22 @@ function App() {
     },
   });
 
+  const locationSelection = (locationData) => {
+    setObservatoryPosition({ ...observatoryPosition, ...locationData });
+    console.log("new position settings", {
+      ...observatoryPosition,
+      ...locationData,
+    });
+  };
+
+  const dateSelection = (dateData) => {
+    setObservatoryPosition({ ...observatoryPosition, date: dateData });
+    console.log("new position settings", {
+      ...observatoryPosition,
+      date: dateData,
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -39,12 +55,8 @@ function App() {
         <IconButton onClick={() => setDarkMode(!darkMode)}>
           {darkMode === true ? <WbSunnyIcon /> : <NightsStayIcon />}
         </IconButton>
-        <Location locationSelection={(data) => console.log(data)} />
-        <Calendar
-          dateSelection={(data) =>
-            setObservatoryPosition({ ...observatoryPosition, time: data })
-          }
-        />
+        <Location locationSelection={locationSelection} />
+        <Calendar dateSelection={dateSelection} />
       </Container>
     </ThemeProvider>
   );

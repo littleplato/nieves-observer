@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: 200,
+    minWidth: 225,
   },
 }));
 

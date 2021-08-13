@@ -9,7 +9,7 @@ import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 
 const defaultPosition = {
-  date: new Date().toISOString().slice(0, 10),
+  date: new Date().toISOString().slice(0, 10) + " 07:00:00",
   longitude: "33.5573234",
   latitude: "-117.7362203",
 };

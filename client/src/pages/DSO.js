@@ -5,11 +5,11 @@ import Button from "@material-ui/core/Button";
 
 const objectTypes = [
   "Galaxies",
-  "Emission Nebula",
-  "Globular Cluster",
-  "Open Cluster",
-  "Planetary Nebula",
-  "Supernova Remnant",
+  "Emission Nebulae",
+  "Globular Clusters",
+  "Open Clusters",
+  "Planetary Nebulae",
+  "Supernova Remnants",
 ];
 
 export default function DSO(props) {
@@ -19,7 +19,12 @@ export default function DSO(props) {
         Deep Sky Objects for Tonight
       </Typography>
       {objectTypes.map((object) => (
-        <Button style={{ fontSize: "13px" }}>{object}</Button>
+        <Button
+          style={{ fontSize: "12px", fontWeight: 700 }}
+          onClick={() => console.log("select object")}
+        >
+          {object}
+        </Button>
       ))}
       <p />
       <DSOList

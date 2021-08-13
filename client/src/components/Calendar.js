@@ -13,8 +13,8 @@ export default function Calendar(props) {
   );
 
   const handleDateChange = (date) => {
-    setSelectedDate(`${date.toISOString().slice(0, 10)} 00:00:00`);
-    props.dateSelection(`${date.toISOString().slice(0, 10)} 00:00:00`);
+    setSelectedDate(`${date.toISOString().slice(0, 10)} 07:00:00`);
+    props.dateSelection(`${date.toISOString().slice(0, 10)} 07:00:00`);
   };
 
   return (

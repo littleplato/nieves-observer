@@ -1,9 +1,9 @@
-import { useState } from "react";
+import SchedulerTable from "../components/SchedulerTable";
 
 export default function Scheduler(props) {
-  const [schedulerShow, setSchedulerShow] = useState(props.schedulerData);
-
-  return schedulerShow.length > 0
-    ? schedulerShow.map((item, i) => item.name)
-    : "There's nothing on your schedule.";
+  return props.schedulerData.length > 0 ? (
+    <SchedulerTable schedulerData={props.schedulerData} />
+  ) : (
+    "There's nothing on your schedule."
+  );
 }

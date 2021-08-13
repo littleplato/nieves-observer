@@ -1,28 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
-// import Typography from "@material-ui/core/Typography";
-// import DSOList from "./components/DSOList";
 import SideNav from "./components/SideNav";
-import Schedule from "./pages/Schedule";
+import Scheduler from "./pages/Scheduler";
 import Exoplanets from "./pages/Exoplanets";
 import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 
+const defaultPosition = {
+  date: new Date().toISOString().slice(0, 10),
+  longitude: "33.5573234",
+  latitude: "-117.7362203",
+};
+
+export const DarkModeContext = createContext();
+console.log("DataContent", DarkModeContext);
+
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [observatoryPosition, setObservatoryPosition] = useState({
-    date: new Date().toISOString().slice(0, 10),
-    longitude: "33.5573234",
-    latitude: "-117.7362203",
-  });
+  const [observatoryPosition, setObservatoryPosition] =
+    useState(defaultPosition);
   const [objList, setObjList] = useState({ state: "loading" });
+  const [schedulerData, setSchedulerData] = useState([]);
 
   const theme = createTheme({
     palette: {
-      type: darkMode === true ? "dark" : "light",
-      primary: { main: darkMode === true ? "#90a4ae" : "#455a64" },
+      type: darkMode ? "dark" : "light",
+      primary: { main: darkMode ? "#90a4ae" : "#455a64" },
     },
     typography: {
       fontFamily: "Quicksand",
@@ -44,7 +49,6 @@ function App() {
       });
       const data = await res.json();
       console.log(data);
-
       setObjList(data);
     };
     fetchDSO();
@@ -62,7 +66,6 @@ function App() {
       });
       const data = await res.json();
       console.log(data);
-
       setObjList(data);
     };
     refetchDSO();
@@ -74,10 +77,6 @@ function App() {
       ...locationData,
     };
     setObservatoryPosition({ ...observatoryPosition, ...locationData });
-    console.log("new position settings", {
-      ...observatoryPosition,
-      ...locationData,
-    });
     positionUpdate(newObservatoryPosition);
     setObjList({ state: "loading" });
   };
@@ -88,12 +87,13 @@ function App() {
       ...dateData,
     };
     setObservatoryPosition({ ...observatoryPosition, date: dateData });
-    console.log("new position settings", {
-      ...observatoryPosition,
-      date: dateData,
-    });
     positionUpdate(newObservatoryPosition);
     setObjList({ state: "loading" });
+  };
+
+  const addToScheduler = (data) => {
+    console.log("this goes down:", [...schedulerData, data]);
+    setSchedulerData([...schedulerData, data]);
   };
 
   return (
@@ -105,20 +105,22 @@ function App() {
         locationSelection={locationSelection}
         dateSelection={dateSelection}
       >
-        <Switch>
-          <Route exact path="/">
-            <DSO objList={objList} />
-          </Route>
-          <Route path="/schedule">
-            <Schedule />
-          </Route>
-          <Route path="/exoplanets">
-            <Exoplanets />
-          </Route>
-          <Route path="/eclipsingbinaries">
-            <EclipsingBinaries />
-          </Route>
-        </Switch>
+        <DarkModeContext.Provider value={darkMode}>
+          <Switch>
+            <Route exact path="/">
+              <DSO objList={objList} addToScheduler={addToScheduler} />
+            </Route>
+            <Route path="/scheduler">
+              <Scheduler schedulerData={schedulerData} />
+            </Route>
+            <Route path="/exoplanets">
+              <Exoplanets />
+            </Route>
+            <Route path="/eclipsingbinaries">
+              <EclipsingBinaries />
+            </Route>
+          </Switch>
+        </DarkModeContext.Provider>
       </SideNav>
     </ThemeProvider>
   );

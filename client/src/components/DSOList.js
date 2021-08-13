@@ -8,6 +8,12 @@ export default function DSOList(props) {
   return props.objList.state === "loading" ? (
     <CircularProgress />
   ) : (
-    mapData?.map((dso, i) => <DSORow dso={dso} key={i} />)
+    mapData?.map((dso, i) => (
+      <DSORow
+        dso={dso}
+        key={i}
+        addToScheduler={(selected) => props.addToScheduler(selected)}
+      />
+    ))
   );
 }

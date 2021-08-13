@@ -24,6 +24,8 @@ import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import GitHubIcon from "@material-ui/icons/GitHub";
+// import ObsStats from "./ObsStats";
 
 const drawerWidth = 240;
 
@@ -122,17 +124,34 @@ export default function SideBar(props) {
         position="fixed"
         className={classes.appBar}
         elevation={0}
-        color="#fff"
+        color="inherit"
       >
         <Toolbar>
           <Typography variant="subtitle1" className={classes.nav}>
-            Scheduler
+            <Link
+              component={RouterLink}
+              color="inherit"
+              to="/scheduler"
+              style={{ textDecoration: "none" }}
+            >
+              Scheduler
+            </Link>
           </Typography>
+          <Tooltip title="See source on GitHub">
+            <IconButton
+              onClick={() => {
+                console.log("github");
+              }}
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Toggle light/dark mode">
             <IconButton onClick={() => props.selectMode(!props.darkMode)}>
               {props.darkMode === true ? <WbSunnyIcon /> : <NightsStayIcon />}
             </IconButton>
           </Tooltip>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -175,6 +194,7 @@ export default function SideBar(props) {
             />
           </Container>
         </div>
+        {/* <ObsStats /> */}
         <Divider />
 
         <List>

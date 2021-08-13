@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -45,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DSORow(props) {
   const classes = useStyles();
+  const [disableButton, setDisableButton] = useState(false);
+
+  const handleAdd = () => {
+    setDisableButton(true);
+    console.log(`${props.dso?.name} added`);
+    props.addToScheduler(props.dso);
+  };
 
   return (
     <div className={classes.card}>
@@ -59,7 +66,7 @@ export default function DSORow(props) {
             <div className={classes.details}>
               <CardHeader
                 action={
-                  <IconButton onClick={() => console.log("click add")}>
+                  <IconButton onClick={handleAdd} disabled={disableButton}>
                     <AddIcon />
                   </IconButton>
                 }

@@ -28,11 +28,7 @@ export default function Location(props) {
 
   const handleChange = (event) => {
     setLocation(event.target.value);
-    props.locationSelection(
-      event.target.value === "LCRO"
-        ? observatoryLocations.LCRO
-        : observatoryLocations.NO
-    );
+    props.locationSelection(observatoryLocations[event.target.value]);
   };
 
   return (

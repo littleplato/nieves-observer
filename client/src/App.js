@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+// import Typography from "@material-ui/core/Typography";
 import DSOList from "./components/DSOList";
 import SideNav from "./components/SideNav";
-import { format } from "date-fns";
+import Schedule from "./pages/Schedule";
+import Exoplanets from "./pages/Exoplanets";
+import EclipsingBinaries from "./pages/EclipsingBinaries";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -102,14 +104,20 @@ function App() {
         locationSelection={locationSelection}
         dateSelection={dateSelection}
       >
-        <Container>
-          <Typography variant="h1" gutterBottom>
-            What's up on {format(new Date(), "do MMMM Y")}?
-          </Typography>
-          {/* <Location locationSelection={locationSelection} />
-        <Calendar dateSelection={dateSelection} /> */}
-          <DSOList objList={objList} />
-        </Container>
+        <Switch>
+          <Route exact path="/">
+            <DSOList objList={objList} />
+          </Route>
+          <Route path="/schedule">
+            <Schedule />
+          </Route>
+          <Route path="/exoplanets">
+            <Exoplanets />
+          </Route>
+          <Route path="/eclipsingbinaries">
+            <EclipsingBinaries />
+          </Route>
+        </Switch>
       </SideNav>
     </ThemeProvider>
   );

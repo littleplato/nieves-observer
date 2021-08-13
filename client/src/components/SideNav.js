@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -61,9 +63,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const navObjects = [
-  { text: "Deep Sky Objects", icon: <BubbleChartIcon /> },
-  { text: "Exoplanets", icon: <AdjustIcon /> },
-  { text: "Eclipsing Binaries", icon: <TollIcon /> },
+  { text: "Deep Sky Objects", icon: <BubbleChartIcon />, link: "/" },
+  { text: "Exoplanets", icon: <AdjustIcon />, link: "/exoplanets" },
+  {
+    text: "Eclipsing Binaries",
+    icon: <TollIcon />,
+    link: "/eclipsingbinaries",
+  },
 ];
 
 export default function SideBar(props) {
@@ -72,11 +78,13 @@ export default function SideBar(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} elevation={0}>
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        elevation={0}
+        color="#fff"
+      >
         <Toolbar>
-          {/* <Typography variant="h6" noWrap>
-            Permanent drawer
-          </Typography> */}
           <Typography variant="subtitle1" className={classes.nav}>
             Scheduler
           </Typography>
@@ -118,10 +126,19 @@ export default function SideBar(props) {
 
         <List>
           {navObjects.map((item, index) => (
-            <ListItem button key={item.text}>
-              <ListItemIcon className={classes.icon}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
+            <Link
+              component={RouterLink}
+              color="inherit"
+              to={item.link}
+              style={{ textDecoration: "none" }}
+            >
+              <ListItem button key={item.text}>
+                <ListItemIcon className={classes.icon}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>

@@ -3,13 +3,9 @@ import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
-import NightsStayIcon from "@material-ui/icons/NightsStay";
-import Calendar from "./components/Calendar";
-import Location from "./components/Location";
 import DSOList from "./components/DSOList";
+import SideNav from "./components/SideNav";
+import { format } from "date-fns";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -28,7 +24,7 @@ function App() {
     typography: {
       fontFamily: "Quicksand",
       h1: {
-        fontSize: 40,
+        fontSize: 30,
         fontWeight: 500,
       },
     },
@@ -100,17 +96,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container>
-        <Typography variant="h1">Nieves Observation Planner</Typography>
-        <Tooltip title="Toggle light/dark mode">
-          <IconButton onClick={() => setDarkMode(!darkMode)}>
-            {darkMode === true ? <WbSunnyIcon /> : <NightsStayIcon />}
-          </IconButton>
-        </Tooltip>
-        <Location locationSelection={locationSelection} />
-        <Calendar dateSelection={dateSelection} />
-        <DSOList objList={objList} />
-      </Container>
+      <SideNav
+        darkMode={darkMode}
+        selectMode={(mode) => setDarkMode(mode)}
+        locationSelection={locationSelection}
+        dateSelection={dateSelection}
+      >
+        <Container>
+          <Typography variant="h1" gutterBottom>
+            What's up on {format(new Date(), "do MMMM Y")}?
+          </Typography>
+          {/* <Location locationSelection={locationSelection} />
+        <Calendar dateSelection={dateSelection} /> */}
+          <DSOList objList={objList} />
+        </Container>
+      </SideNav>
     </ThemeProvider>
   );
 }

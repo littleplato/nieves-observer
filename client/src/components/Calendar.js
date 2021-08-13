@@ -19,7 +19,6 @@ export default function Calendar(props) {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      {/* <Grid container justifyContent="space-around"> */}
       <Grid container>
         <KeyboardDatePicker
           disableToolbar

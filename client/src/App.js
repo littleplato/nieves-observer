@@ -94,6 +94,7 @@ function App() {
   const addToScheduler = (data) => {
     console.log("this goes down:", [...schedulerData, data]);
     setSchedulerData([...schedulerData, data]);
+    // localStorage.setItem("savedSchedule", [...schedulerData, data]);
   };
 
   return (

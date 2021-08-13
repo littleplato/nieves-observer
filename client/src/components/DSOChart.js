@@ -5,6 +5,7 @@ import {
   CartesianGrid,
   YAxis,
   Tooltip,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { DarkModeContext } from "../App";
@@ -24,7 +25,7 @@ export default function DSOChart(props) {
         }}
       >
         <CartesianGrid
-          strokeDasharray="3 3"
+          // strokeDasharray="3 3"
           stroke={darkModeContext ? "#777B7E" : "#D9DDDC"}
         />
         <YAxis
@@ -40,6 +41,16 @@ export default function DSOChart(props) {
           }}
         />
         {/* <Legend /> */}
+        <ReferenceLine
+          x="8"
+          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          strokeDasharray="3 3"
+        />
+        <ReferenceLine
+          x="21"
+          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          strokeDasharray="3 3"
+        />
         <Line
           type={"natural"}
           dataKey="alt"

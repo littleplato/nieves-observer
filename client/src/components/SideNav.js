@@ -176,9 +176,16 @@ export default function SideBar(props) {
         anchor="left"
       >
         <Container>
-          <Typography variant="h6" noWrap className={classes.logo}>
-            Observatory Planner
-          </Typography>
+          <Link
+            component={RouterLink}
+            color="inherit"
+            to="/"
+            style={{ textDecoration: "none" }}
+          >
+            <Typography variant="h6" noWrap className={classes.logo}>
+              Obs Planner
+            </Typography>
+          </Link>
         </Container>
         <div />
         <Divider />

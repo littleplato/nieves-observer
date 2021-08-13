@@ -3,11 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 // import Typography from "@material-ui/core/Typography";
-import DSOList from "./components/DSOList";
+// import DSOList from "./components/DSOList";
 import SideNav from "./components/SideNav";
 import Schedule from "./pages/Schedule";
 import Exoplanets from "./pages/Exoplanets";
 import EclipsingBinaries from "./pages/EclipsingBinaries";
+import DSO from "./pages/DSO";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -106,7 +107,7 @@ function App() {
       >
         <Switch>
           <Route exact path="/">
-            <DSOList objList={objList} />
+            <DSO objList={objList} />
           </Route>
           <Route path="/schedule">
             <Schedule />

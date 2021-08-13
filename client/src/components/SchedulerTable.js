@@ -2,10 +2,17 @@ import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import SchedulerChart from "./SchedulerChart";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
     marginBottom: 15,
+  },
+  chart: {
+    height: 400,
+    marginTop: 50,
+    paddingTop: 25,
   },
 }));
 
@@ -68,6 +75,9 @@ export default function SchedulerTable(props) {
           disableSelectionOnClick
         />
       </div>
+      <Paper className={classes.chart}>
+        <SchedulerChart schedulerData={props.schedulerData} />
+      </Paper>
     </>
   );
 }

@@ -55,10 +55,7 @@ export default function SchedulerChart(props) {
           bottom: 25,
         }}
       >
-        <CartesianGrid
-          // strokeDasharray="3 3"
-          stroke={darkModeContext ? "#616161" : "#D9DDDC"}
-        />
+        <CartesianGrid stroke={darkModeContext ? "#616161" : "#D9DDDC"} />
         <YAxis
           stroke={darkModeContext ? "#b0bec5" : "#546e7a"}
           domain={[10, 90]}
@@ -71,7 +68,6 @@ export default function SchedulerChart(props) {
             opacity: 0.8,
           }}
         />
-        {/* <Legend /> */}
         <ReferenceLine
           x="8"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}

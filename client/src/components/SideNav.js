@@ -25,6 +25,8 @@ import AdjustIcon from "@material-ui/icons/Adjust";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import GitHubIcon from "@material-ui/icons/GitHub";
+import logoLight from "../assets/logo-light.png";
+import logoDark from "../assets/logo-dark.png";
 // import ObsStats from "./ObsStats";
 
 const drawerWidth = 240;
@@ -51,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   logo: {
-    paddingTop: 15,
+    paddingTop: 20,
     paddingBottom: 15,
   },
   options: {
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 20,
   },
   icon: {
@@ -148,7 +150,7 @@ export default function SideBar(props) {
           </Tooltip>
           <Tooltip title="Toggle light/dark mode">
             <IconButton onClick={() => props.selectMode(!props.darkMode)}>
-              {props.darkMode === true ? <WbSunnyIcon /> : <NightsStayIcon />}
+              {props.darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
             </IconButton>
           </Tooltip>
 
@@ -182,13 +184,16 @@ export default function SideBar(props) {
             to="/"
             style={{ textDecoration: "none" }}
           >
-            <Typography variant="h6" noWrap className={classes.logo}>
-              Obs Planner
-            </Typography>
+            <img
+              src={props.darkMode ? logoDark : logoLight}
+              alt="logo"
+              width={drawerWidth - 50}
+              className={classes.logo}
+            />
           </Link>
         </Container>
         <div />
-        <Divider />
+
         <div className={classes.options}>
           <Container>
             <Location

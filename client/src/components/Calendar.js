@@ -1,5 +1,5 @@
 import "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -7,10 +7,10 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
+const today = new Date().toISOString().slice(0, 10);
+
 export default function Calendar(props) {
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date().toISOString().slice(0, 10)
-  );
+  const [selectedDate, setSelectedDate] = useState(today);
 
   const handleDateChange = (date) => {
     setSelectedDate(`${date.toISOString().slice(0, 10)} 07:00:00`);
@@ -30,9 +30,6 @@ export default function Calendar(props) {
           value={selectedDate}
           onChange={handleDateChange}
           autoOk={true}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
         />
       </Grid>
     </MuiPickersUtilsProvider>

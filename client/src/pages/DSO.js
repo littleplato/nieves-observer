@@ -15,8 +15,8 @@ const objectTypes = [
 export default function DSO(props) {
   return (
     <div>
-      <Typography variant="h6" gutterBottom>
-        Deep Sky Objects for Tonight
+      <Typography variant="h4" gutterBottom>
+        Deep Sky Objects for {new Date(props.date).toDateString()}
       </Typography>
       {objectTypes.map((object) => (
         <Button

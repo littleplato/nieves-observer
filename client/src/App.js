@@ -15,7 +15,6 @@ const defaultPosition = {
 };
 
 export const DarkModeContext = createContext();
-console.log("DataContent", DarkModeContext);
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -94,7 +93,7 @@ function App() {
   const addToScheduler = (data) => {
     console.log("this goes down:", [...schedulerData, data]);
     setSchedulerData([...schedulerData, data]);
-    // localStorage.setItem("savedSchedule", [...schedulerData, data]);
+    // localStorage.setItem("savedSchedule", )
   };
 
   return (
@@ -109,7 +108,11 @@ function App() {
         <DarkModeContext.Provider value={darkMode}>
           <Switch>
             <Route exact path="/">
-              <DSO objList={objList} addToScheduler={addToScheduler} />
+              <DSO
+                objList={objList}
+                addToScheduler={addToScheduler}
+                date={observatoryPosition.date}
+              />
             </Route>
             <Route path="/scheduler">
               <Scheduler schedulerData={schedulerData} />

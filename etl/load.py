@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 class DSOModel(db.Model):
     __tablename__ = "dso"
     id = db.Column(db.Integer, primary_key=True)
-    dso_id = db.Column(db.String, unique=True, nullable=False)
+    params = db.Column(db.String, unique=True, nullable=False)
     name = db.Column(db.String, nullable=False)
     ngcic = db.Column(db.String, nullable=False)
     common = db.Column(db.String, nullable=False)
@@ -31,7 +31,7 @@ db.create_all()
 print("create model success")
 
 
-t_host = os.getenv("t_host")
+t_host = os.getenv("t_host ")
 t_port = os.getenv("t_port")
 t_dbname = os.getenv("t_dbname")
 t_user = os.getenv("t_user")
@@ -42,7 +42,7 @@ db_cursor = db_conn.cursor()
 print("connection success")
 f_contents = open('complete_messier.csv', 'r')
 
-db_cursor.copy_from(f_contents, "dso", columns=("dso_id", 'name', 'ngcic', 'common', 'type', 'ra', 'dec', 'mag', 'dist', 'con',
+db_cursor.copy_from(f_contents, "dso", columns=("params", 'name', 'ngcic', 'common', 'type', 'ra', 'dec', 'mag', 'dist', 'con',
                                                 'image'), sep=",")
 print("load complete")
 db_conn.commit()

@@ -10,18 +10,18 @@ import {
 } from "recharts";
 import { DarkModeContext } from "../App";
 
-export default function DSOChart(props) {
+export default function ObjectChart(props) {
   const darkModeContext = useContext(DarkModeContext);
   return (
     <ResponsiveContainer>
       <LineChart
-        width={300}
-        height={170}
+        width={280}
+        height={150}
         data={props.plot}
         margin={{
           right: 20,
           left: -20,
-          bottom: 25,
+          bottom: 45,
         }}
       >
         <CartesianGrid

@@ -7,6 +7,7 @@ import Scheduler from "./pages/Scheduler";
 import Exoplanets from "./pages/Exoplanets";
 import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
+import Objects from "./pages/Objects";
 
 const defaultPosition = {
   date: new Date().toISOString().slice(0, 10) + " 07:00:00",
@@ -122,6 +123,9 @@ function App() {
             </Route>
             <Route path="/eclipsingbinaries">
               <EclipsingBinaries />
+            </Route>
+            <Route path="/object/:objectID">
+              <Objects observatoryPosition={observatoryPosition} />
             </Route>
           </Switch>
         </DarkModeContext.Provider>

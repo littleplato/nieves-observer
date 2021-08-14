@@ -11,38 +11,47 @@ import {
 } from "recharts";
 import { DarkModeContext } from "../App";
 
-const convertPlotsToRecharts = (schedulerFullDataArray) => {
-  let plot_data = [];
-  for (let i = 0; i < schedulerFullDataArray.length; i++) {
-    const parsedData = JSON.parse(
-      schedulerFullDataArray[i].plot.replaceAll("'", '"')
-    );
-    if (plot_data.length < 1) {
-      for (let j = 0; j < parsedData.length; j++) {
-        const dataPoint = {
-          [schedulerFullDataArray[i].name]: parsedData[j].alt,
-        };
-        plot_data.push(dataPoint);
-      }
-    } else {
-      for (let j = 0; j < parsedData.length; j++) {
-        const newDataPoint = {
-          [schedulerFullDataArray[i].name]: parsedData[j].alt,
-        };
-        plot_data[j] = { ...plot_data[j], ...newDataPoint };
-        if (i === schedulerFullDataArray.length - 1) {
-          const timeAxis = { time: parsedData[j].time };
-          plot_data[j] = { ...plot_data[j], ...timeAxis };
-        }
-      }
-    }
-  }
-  return plot_data;
-};
+const chartLineColors = [
+  "#ffcc80",
+  "#80cbc4",
+  "#90caf9",
+  "#ffab91",
+  "#b39ddb",
+  "#80cbc4",
+  "#b0bec5",
+  "#fff59d",
+];
 
 export default function SchedulerChart(props) {
   const darkModeContext = useContext(DarkModeContext);
-
+  const convertPlotsToRecharts = (schedulerFullDataArray) => {
+    let plot_data = [];
+    for (let i = 0; i < schedulerFullDataArray.length; i++) {
+      const parsedData = JSON.parse(
+        schedulerFullDataArray[i].plot.replaceAll("'", '"')
+      );
+      if (plot_data.length < 1) {
+        for (let j = 0; j < parsedData.length; j++) {
+          const dataPoint = {
+            [schedulerFullDataArray[i].name]: parsedData[j].alt,
+          };
+          plot_data.push(dataPoint);
+        }
+      } else {
+        for (let j = 0; j < parsedData.length; j++) {
+          const newDataPoint = {
+            [schedulerFullDataArray[i].name]: parsedData[j].alt,
+          };
+          plot_data[j] = { ...plot_data[j], ...newDataPoint };
+          if (i === schedulerFullDataArray.length - 1) {
+            const timeAxis = { time: parsedData[j].time };
+            plot_data[j] = { ...plot_data[j], ...timeAxis };
+          }
+        }
+      }
+    }
+    return plot_data;
+  };
   return (
     <ResponsiveContainer>
       <LineChart
@@ -69,21 +78,26 @@ export default function SchedulerChart(props) {
           }}
         />
         <ReferenceLine
-          x="8"
+          x="6"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
           strokeWidth={2}
         />
         <ReferenceLine
-          x="21"
+          x="18"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
           strokeWidth={2}
         />
         {Object.keys(convertPlotsToRecharts(props.schedulerData)[0])
           .slice(0, -1)
-          .map((keyName) => (
-            <Line type="natural" dataKey={keyName} dot={false} />
+          .map((keyName, i) => (
+            <Line
+              type="natural"
+              dataKey={keyName}
+              dot={false}
+              stroke={chartLineColors[i]}
+            />
           ))}
         <Legend />
       </LineChart>

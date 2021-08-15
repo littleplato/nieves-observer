@@ -4,6 +4,7 @@ import {
   Line,
   CartesianGrid,
   YAxis,
+  XAxis,
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
@@ -34,6 +35,7 @@ export default function ObjectChart(props) {
           tick={{ fontSize: 10 }}
           allowDataOverflow={true}
         />
+        <XAxis dataKey="name" tick={false} />
         <Tooltip
           contentStyle={{
             backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
@@ -41,12 +43,12 @@ export default function ObjectChart(props) {
           }}
         />
         <ReferenceLine
-          x="6"
+          x="19:00 PM"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />
         <ReferenceLine
-          x="18"
+          x="06:00 AM"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />

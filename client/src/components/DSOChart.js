@@ -4,6 +4,7 @@ import {
   Line,
   CartesianGrid,
   YAxis,
+  XAxis,
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
@@ -12,6 +13,7 @@ import { DarkModeContext } from "../App";
 
 export default function DSOChart(props) {
   const darkModeContext = useContext(DarkModeContext);
+
   return (
     <ResponsiveContainer>
       <LineChart
@@ -21,7 +23,7 @@ export default function DSOChart(props) {
         margin={{
           right: 20,
           left: -20,
-          bottom: 25,
+          bottom: -10,
         }}
       >
         <CartesianGrid
@@ -34,6 +36,7 @@ export default function DSOChart(props) {
           tick={{ fontSize: 10 }}
           allowDataOverflow={true}
         />
+        <XAxis dataKey="name" tick={false} />
         <Tooltip
           contentStyle={{
             backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
@@ -41,12 +44,12 @@ export default function DSOChart(props) {
           }}
         />
         <ReferenceLine
-          x="6"
+          x="19:00 PM"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />
         <ReferenceLine
-          x="18"
+          x="07:00 AM"
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />

@@ -4,6 +4,7 @@ import {
   Line,
   CartesianGrid,
   YAxis,
+  XAxis,
   Tooltip,
   Legend,
   ReferenceLine,
@@ -61,7 +62,8 @@ export default function SchedulerChart(props) {
           plot_data[j] = { ...plot_data[j], ...newDataPoint };
           if (i === schedulerFullDataArray.length - 1) {
             const timeAxis = { time: parsedData[j].time };
-            plot_data[j] = { ...plot_data[j], ...timeAxis };
+            const timePoints = { name: parsedData[j].name };
+            plot_data[j] = { ...plot_data[j], ...timeAxis, ...timePoints };
           }
         }
       }
@@ -87,6 +89,7 @@ export default function SchedulerChart(props) {
           tick={{ fontSize: 10 }}
           allowDataOverflow={true}
         />
+        <XAxis dataKey="name" tick={false} />
         <Tooltip
           contentStyle={{
             backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
@@ -106,7 +109,7 @@ export default function SchedulerChart(props) {
           strokeWidth={2}
         />
         {Object.keys(convertPlotsToRecharts(props.schedulerData)[0])
-          .slice(0, -1)
+          .slice(0, -2)
           .map((keyName, i) => (
             <Line
               type="natural"
@@ -115,7 +118,7 @@ export default function SchedulerChart(props) {
               stroke={chartLineColors.chooseKey()[i]}
             />
           ))}
-        <Legend />
+        <Legend wrapperStyle={{ marginBottom: 20 }} />
       </LineChart>
     </ResponsiveContainer>
   );

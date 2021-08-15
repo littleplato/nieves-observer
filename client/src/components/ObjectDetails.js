@@ -53,18 +53,15 @@ export default function ObjectDetails({ observatoryPosition }) {
   useEffect(() => {
     const objectShow = params.objectID;
     const fetchObjectDetails = async () => {
-      const res = await fetch(
-        `https://obsplanner.herokuapp.com/dso/${objectShow}`,
-        {
-          method: "POST",
-          body: JSON.stringify(observatoryPosition),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
+      const res = await fetch(`http://127.0.0.1:5000/dso/${objectShow}`, {
+        method: "POST",
+        body: JSON.stringify(observatoryPosition),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const objectData = await res.json();
+      console.log(objectData);
       setObjectShow(objectData);
     };
     fetchObjectDetails();

@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     const fetchDSO = async () => {
-      const res = await fetch("https://obsplanner.herokuapp.com/dso", {
+      const res = await fetch("http://127.0.0.1:5000/dso", {
         method: "POST",
         body: JSON.stringify(observatoryPosition),
         headers: {
@@ -57,7 +57,7 @@ function App() {
 
   const positionUpdate = (newObservatoryPosition) => {
     const refetchDSO = async () => {
-      const res = await fetch("https://obsplanner.herokuapp.com/dso", {
+      const res = await fetch("http://127.0.0.1:5000/dso", {
         method: "POST",
         body: JSON.stringify(newObservatoryPosition),
         headers: {

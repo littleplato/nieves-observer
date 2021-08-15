@@ -58,6 +58,7 @@ export default function ObjectChart(props) {
           dot={false}
           stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
           strokeWidth={2}
+          unit="°"
         />
       </LineChart>
     </ResponsiveContainer>

@@ -116,6 +116,7 @@ export default function SchedulerChart(props) {
               dataKey={keyName}
               dot={false}
               stroke={chartLineColors.chooseKey()[i]}
+              unit="°"
             />
           ))}
         <Legend wrapperStyle={{ marginBottom: 20 }} />

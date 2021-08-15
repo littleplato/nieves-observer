@@ -53,7 +53,6 @@ const columns = [
   {
     field: "comments",
     headerName: "Notes",
-    // type: "number",
     width: 200,
     editable: true,
   },
@@ -61,9 +60,11 @@ const columns = [
 
 export default function SchedulerTable(props) {
   const classes = useStyles();
+  const [showData, setShowData] = useState(props.schedulerData);
   const [checkedItem, setCheckedItem] = useState();
+  const [pageSize, setPageSize] = useState(5);
 
-  const rows = props.schedulerData.map((dso, i) => ({
+  const rows = showData.map((dso, i) => ({
     id: dso.name,
     type: dso.type,
     ra: dso.ra,
@@ -73,12 +74,17 @@ export default function SchedulerTable(props) {
   }));
 
   const handleCheck = (e) => {
-    console.log(e.toString());
-    setCheckedItem(e.toString());
+    console.log(e);
+    setCheckedItem(e);
   };
 
   const handleDelete = () => {
-    console.log(`delete these stuff: ${checkedItem}`);
+    const newShowData = showData.filter((dso) =>
+      checkedItem.every((item) => item !== dso.name)
+    );
+    console.log(newShowData);
+    setShowData(newShowData);
+    props.updateDelete(newShowData);
   };
 
   return (
@@ -91,11 +97,14 @@ export default function SchedulerTable(props) {
       >
         Delete
       </Button>
+
       <div style={{ height: 380, width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={5}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[3, 4, 5]}
           checkboxSelection
           onSelectionModelChange={handleCheck}
         />
@@ -104,7 +113,7 @@ export default function SchedulerTable(props) {
         <Typography variant="h6" className={classes.chartTitle}>
           Elevation of selected objects
         </Typography>
-        <SchedulerChart schedulerData={props.schedulerData} />
+        <SchedulerChart schedulerData={showData} />
       </Paper>
     </div>
   );

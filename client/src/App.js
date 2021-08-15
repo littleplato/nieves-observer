@@ -116,6 +116,11 @@ function App() {
     refetchFilteredDSO();
   };
 
+  const updateDelete = (data) => {
+    console.log("Saved data updated to:", data);
+    setSchedulerData(data);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -136,7 +141,10 @@ function App() {
               />
             </Route>
             <Route path="/scheduler">
-              <Scheduler schedulerData={schedulerData} />
+              <Scheduler
+                schedulerData={schedulerData}
+                updateDelete={updateDelete}
+              />
             </Route>
             <Route path="/exoplanets">
               <Exoplanets />

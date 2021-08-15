@@ -115,6 +115,7 @@ export default function SchedulerChart(props) {
               type="natural"
               dataKey={keyName}
               dot={false}
+              key={i}
               stroke={chartLineColors.chooseKey()[i]}
               unit="°"
             />

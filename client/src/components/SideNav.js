@@ -116,7 +116,7 @@ const navObjects = [
   },
 ];
 
-export default function SideBar(props) {
+export default function SideNav(props) {
   const classes = useStyles();
 
   return (
@@ -215,6 +215,7 @@ export default function SideBar(props) {
               component={RouterLink}
               color="inherit"
               to={item.link}
+              key={index}
               style={{ textDecoration: "none" }}
             >
               <ListItem button key={item.text}>

@@ -28,6 +28,7 @@ export default function DSO(props) {
         <Button
           style={{ fontSize: "12px", fontWeight: 700 }}
           onClick={handleFilter}
+          key={i}
         >
           {object}
         </Button>

@@ -22,7 +22,9 @@ function App() {
   const [observatoryPosition, setObservatoryPosition] =
     useState(defaultPosition);
   const [objList, setObjList] = useState({ state: "loading" });
-  const [schedulerData, setSchedulerData] = useState([]);
+  const existingSchedulerData =
+    JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
+  const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
 
   const theme = createTheme({
     palette: {
@@ -94,7 +96,10 @@ function App() {
   const addToScheduler = (data) => {
     console.log("this goes down:", [...schedulerData, data]);
     setSchedulerData([...schedulerData, data]);
-    // localStorage.setItem("savedSchedule", )
+    localStorage.setItem(
+      "savedSchedule",
+      JSON.stringify([...schedulerData, data])
+    );
   };
 
   const handleFilter = (selectedType) => {
@@ -117,8 +122,9 @@ function App() {
   };
 
   const updateDelete = (data) => {
-    console.log("Saved data updated to:", data);
     setSchedulerData(data);
+    localStorage.clear();
+    localStorage.setItem("savedSchedule", JSON.stringify(data));
   };
 
   return (

@@ -93,7 +93,6 @@ export default function SchedulerChart(props) {
         <Tooltip
           contentStyle={{
             backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
-            // opacity: 0.8,
           }}
         />
         <ReferenceLine

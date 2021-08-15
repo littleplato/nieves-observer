@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
@@ -39,23 +39,6 @@ function App() {
       },
     },
   });
-
-  useEffect(() => {
-    const fetchDSO = async () => {
-      const res = await fetch("http://127.0.0.1:5000/dso", {
-        method: "POST",
-        body: JSON.stringify(observatoryPosition),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      setObjList(data);
-    };
-    fetchDSO();
-    // eslint-disable-next-line
-  }, []);
 
   const positionUpdate = (newObservatoryPosition) => {
     const refetchDSO = async () => {
@@ -103,6 +86,7 @@ function App() {
   };
 
   const handleFilter = (selectedType) => {
+    setObjList({ state: "loading" });
     const refetchFilteredDSO = async () => {
       const res = await fetch("http://127.0.0.1:5000/dso/filter", {
         method: "POST",
@@ -141,8 +125,9 @@ function App() {
             <Route exact path="/">
               <DSO
                 objList={objList}
+                sendObjList={(data) => setObjList(data)}
                 addToScheduler={addToScheduler}
-                date={observatoryPosition.date}
+                observatoryPosition={observatoryPosition}
                 handleFilter={handleFilter}
               />
             </Route>

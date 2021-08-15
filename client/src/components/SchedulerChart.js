@@ -11,19 +11,35 @@ import {
 } from "recharts";
 import { DarkModeContext } from "../App";
 
-const chartLineColors = [
-  "#ffcc80",
-  "#80cbc4",
-  "#90caf9",
-  "#ffab91",
-  "#b39ddb",
-  "#80cbc4",
-  "#b0bec5",
-  "#fff59d",
-];
-
 export default function SchedulerChart(props) {
   const darkModeContext = useContext(DarkModeContext);
+
+  const chartLineColors = {
+    dark: [
+      "#ffcc80", //orange
+      "#80cbc4", //teal
+      "#90caf9", //blue
+      "#ffab91", //red
+      "#b39ddb", //purple
+      "#c5e1a5", //green
+      "#b0bec5", //steel
+      "#fff59d", //yellow
+    ],
+    light: [
+      "#ff9800",
+      "#009688",
+      "#1e88e5",
+      "#ff5722",
+      "#673ab7",
+      "#8bc34a",
+      "#607d8b",
+      "#ffeb3b",
+    ],
+    chooseKey() {
+      return darkModeContext ? this.dark : this.light;
+    },
+  };
+
   const convertPlotsToRecharts = (schedulerFullDataArray) => {
     let plot_data = [];
     for (let i = 0; i < schedulerFullDataArray.length; i++) {
@@ -56,7 +72,7 @@ export default function SchedulerChart(props) {
     <ResponsiveContainer>
       <LineChart
         width={300}
-        height={170}
+        height={150}
         data={convertPlotsToRecharts(props.schedulerData)}
         margin={{
           right: 20,
@@ -96,7 +112,7 @@ export default function SchedulerChart(props) {
               type="natural"
               dataKey={keyName}
               dot={false}
-              stroke={chartLineColors[i]}
+              stroke={chartLineColors.chooseKey()[i]}
             />
           ))}
         <Legend />

@@ -97,6 +97,25 @@ function App() {
     // localStorage.setItem("savedSchedule", )
   };
 
+  const handleFilter = (selectedType) => {
+    const refetchFilteredDSO = async () => {
+      const res = await fetch("http://127.0.0.1:5000/dso/filter", {
+        method: "POST",
+        body: JSON.stringify({
+          ...observatoryPosition,
+          dso_type: selectedType,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setObjList(data);
+    };
+    refetchFilteredDSO();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -113,6 +132,7 @@ function App() {
                 objList={objList}
                 addToScheduler={addToScheduler}
                 date={observatoryPosition.date}
+                handleFilter={handleFilter}
               />
             </Route>
             <Route path="/scheduler">

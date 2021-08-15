@@ -10,6 +10,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ObjectChart from "./ObjectChart";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: 15,
     paddingTop: 15,
-    height: 300,
+    height: 320,
   },
 }));
 
@@ -118,7 +119,11 @@ export default function ObjectDetails({ observatoryPosition }) {
         </div>
       </Card>
       <Paper className={classes.paper}>
-        Elevation for {observatoryPosition.date.slice(0, 10)}
+        <Container>
+          <Typography variant="h6" gutterBottom>
+            Elevation for the night of {observatoryPosition.date.slice(0, 10)}
+          </Typography>
+        </Container>
         {objectShow !== null && (
           <ObjectChart
             plot={JSON.parse(objectShow?.plot?.replaceAll("'", '"'))}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { atom, useAtom } from "jotai";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import SideNav from "./components/SideNav";
@@ -9,6 +9,7 @@ import Exoplanets from "./pages/Exoplanets";
 import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 import Objects from "./pages/Objects";
+import SearchResults from "./pages/SearchResults";
 
 const defaultPosition = {
   date: new Date().toISOString().slice(0, 10) + " 07:00:00",
@@ -21,6 +22,7 @@ export const observatoryPositionAtom = atom(defaultPosition);
 
 function App() {
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const history = useHistory();
   const [observatoryPosition, setObservatoryPosition] = useAtom(
     observatoryPositionAtom
   );
@@ -28,6 +30,7 @@ function App() {
   const existingSchedulerData =
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
   const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
+  const [searchResults, setSearchResults] = useState([]);
 
   const theme = createTheme({
     palette: {
@@ -114,6 +117,23 @@ function App() {
     localStorage.setItem("savedSchedule", JSON.stringify(data));
   };
 
+  const handleSearch = (searchTerm) => {
+    const fetchSearchResults = async () => {
+      const res = await fetch("http://127.0.0.1:5000/search", {
+        method: "POST",
+        body: JSON.stringify({ search: searchTerm }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const searchData = await res.json();
+      console.log(searchData);
+      setSearchResults(searchData);
+    };
+    fetchSearchResults();
+    history.push("/search");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -122,6 +142,7 @@ function App() {
         selectMode={(mode) => setDarkMode(mode)}
         locationSelection={locationSelection}
         dateSelection={dateSelection}
+        handleSearch={handleSearch}
       >
         <Switch>
           <Route exact path="/">
@@ -144,6 +165,9 @@ function App() {
           </Route>
           <Route path="/eclipsingbinaries">
             <EclipsingBinaries />
+          </Route>
+          <Route path="/search">
+            <SearchResults searchResults={searchResults} />
           </Route>
           <Route path="/object/:objectID">
             <Objects observatoryPosition={observatoryPosition} />

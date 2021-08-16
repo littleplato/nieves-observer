@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
   const classes = useStyles();
   const searchInput = useRef();
   const history = useHistory();
@@ -53,7 +53,8 @@ export default function SearchBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("search for", searchInput.current.value);
-    history.push("/object/" + searchInput.current.value);
+    // history.push("/object/" + searchInput.current.value);
+    props.handleSearch(searchInput.current.value);
   };
 
   return (

@@ -95,7 +95,6 @@ export default function SchedulerTable(props) {
       >
         Delete
       </Button>
-
       <div style={{ height: 380, width: "100%" }}>
         <DataGrid
           rows={rows}

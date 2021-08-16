@@ -114,7 +114,7 @@ export default function SideNav(props) {
               {props.darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
             </IconButton>
           </Tooltip>
-          <SearchBar />
+          <SearchBar handleSearch={(data) => props.handleSearch(data)} />
         </Toolbar>
       </AppBar>
       <Drawer

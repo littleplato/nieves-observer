@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { alpha, makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -48,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar(props) {
   const classes = useStyles();
   const searchInput = useRef();
-  const history = useHistory();
 
   const handleSearch = (e) => {
     e.preventDefault();

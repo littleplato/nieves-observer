@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useAtom } from "jotai";
 import {
   LineChart,
   Line,
@@ -10,10 +10,10 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
-import { DarkModeContext } from "../App";
+import { darkModeAtom } from "../App";
 
 export default function SchedulerChart(props) {
-  const darkModeContext = useContext(DarkModeContext);
+  const [darkMode] = useAtom(darkModeAtom);
 
   const chartLineColors = {
     dark: [
@@ -37,7 +37,7 @@ export default function SchedulerChart(props) {
       "#ffeb3b",
     ],
     chooseKey() {
-      return darkModeContext ? this.dark : this.light;
+      return darkMode ? this.dark : this.light;
     },
   };
 
@@ -82,9 +82,9 @@ export default function SchedulerChart(props) {
           bottom: 25,
         }}
       >
-        <CartesianGrid stroke={darkModeContext ? "#616161" : "#D9DDDC"} />
+        <CartesianGrid stroke={darkMode ? "#616161" : "#D9DDDC"} />
         <YAxis
-          stroke={darkModeContext ? "#b0bec5" : "#546e7a"}
+          stroke={darkMode ? "#b0bec5" : "#546e7a"}
           domain={[10, 90]}
           tick={{ fontSize: 10 }}
           allowDataOverflow={true}
@@ -92,18 +92,18 @@ export default function SchedulerChart(props) {
         <XAxis dataKey="name" tick={false} />
         <Tooltip
           contentStyle={{
-            backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
+            backgroundColor: darkMode ? "#4A4A4A" : "#fff",
           }}
         />
         <ReferenceLine
           x="19:00 PM"
-          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
           strokeWidth={2}
         />
         <ReferenceLine
           x="06:00 AM"
-          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
           strokeWidth={2}
         />

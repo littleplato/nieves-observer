@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useAtom } from "jotai";
 import {
   LineChart,
   Line,
@@ -9,10 +9,10 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
-import { DarkModeContext } from "../App";
+import { darkModeAtom } from "../App";
 
 export default function ObjectChart(props) {
-  const darkModeContext = useContext(DarkModeContext);
+  const [darkMode] = useAtom(darkModeAtom);
   return (
     <ResponsiveContainer>
       <LineChart
@@ -27,10 +27,10 @@ export default function ObjectChart(props) {
       >
         <CartesianGrid
           // strokeDasharray="3 3"
-          stroke={darkModeContext ? "#777B7E" : "#D9DDDC"}
+          stroke={darkMode ? "#777B7E" : "#D9DDDC"}
         />
         <YAxis
-          stroke={darkModeContext ? "#b0bec5" : "#546e7a"}
+          stroke={darkMode ? "#b0bec5" : "#546e7a"}
           domain={[10, 90]}
           tick={{ fontSize: 10 }}
           allowDataOverflow={true}
@@ -38,25 +38,25 @@ export default function ObjectChart(props) {
         <XAxis dataKey="name" tick={false} />
         <Tooltip
           contentStyle={{
-            backgroundColor: darkModeContext ? "#4A4A4A" : "#fff",
+            backgroundColor: darkMode ? "#4A4A4A" : "#fff",
             opacity: 0.8,
           }}
         />
         <ReferenceLine
           x="19:00 PM"
-          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />
         <ReferenceLine
           x="06:00 AM"
-          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           strokeDasharray="3 3"
         />
         <Line
           type={"natural"}
           dataKey="alt"
           dot={false}
-          stroke={darkModeContext ? "#D9DDDC" : "#777B7E"}
+          stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           strokeWidth={2}
           unit="°"
         />

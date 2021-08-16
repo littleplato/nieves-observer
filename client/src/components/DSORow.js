@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -8,8 +9,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/icons/Add";
 import DSOChart from "./DSOChart";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const cardHeight = 180;
 
@@ -45,12 +48,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DSORow(props) {
   const classes = useStyles();
-  const [disableButton, setDisableButton] = useState(false);
+  const history = useHistory();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleAdd = () => {
-    setDisableButton(true);
+    setAnchorEl(null);
     console.log(`${props.dso?.name} added`);
     props.addToScheduler(props.dso);
+  };
+
+  const handleReadMore = () => {
+    history.push("/object/" + props.dso?.params);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -66,9 +82,21 @@ export default function DSORow(props) {
             <div className={classes.details}>
               <CardHeader
                 action={
-                  <IconButton onClick={handleAdd} disabled={disableButton}>
-                    <AddIcon />
-                  </IconButton>
+                  <div>
+                    <IconButton onClick={handleClick}>
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <MenuItem onClick={handleReadMore}>Read more</MenuItem>
+                      <MenuItem onClick={handleAdd}>Add to list</MenuItem>
+                    </Menu>
+                  </div>
                 }
                 title={props.dso?.name}
                 subheader={props.dso?.type}

@@ -1,4 +1,5 @@
 import { useState, createContext } from "react";
+import { atom, useAtom } from "jotai";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
@@ -15,10 +16,12 @@ const defaultPosition = {
   latitude: "-117.7362203",
 };
 
-export const DarkModeContext = createContext();
+// export const DarkModeContext = createContext();
+export const darkModeAtom = atom(true);
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  // const [darkMode, setDarkMode] = useState(true);
   const [observatoryPosition, setObservatoryPosition] =
     useState(defaultPosition);
   const [objList, setObjList] = useState({ state: "loading" });
@@ -120,34 +123,34 @@ function App() {
         locationSelection={locationSelection}
         dateSelection={dateSelection}
       >
-        <DarkModeContext.Provider value={darkMode}>
-          <Switch>
-            <Route exact path="/">
-              <DSO
-                objList={objList}
-                sendObjList={(data) => setObjList(data)}
-                addToScheduler={addToScheduler}
-                observatoryPosition={observatoryPosition}
-                handleFilter={handleFilter}
-              />
-            </Route>
-            <Route path="/scheduler">
-              <Scheduler
-                schedulerData={schedulerData}
-                updateDelete={updateDelete}
-              />
-            </Route>
-            <Route path="/exoplanets">
-              <Exoplanets />
-            </Route>
-            <Route path="/eclipsingbinaries">
-              <EclipsingBinaries />
-            </Route>
-            <Route path="/object/:objectID">
-              <Objects observatoryPosition={observatoryPosition} />
-            </Route>
-          </Switch>
-        </DarkModeContext.Provider>
+        {/* <DarkModeContext.Provider value={darkMode}> */}
+        <Switch>
+          <Route exact path="/">
+            <DSO
+              objList={objList}
+              sendObjList={(data) => setObjList(data)}
+              addToScheduler={addToScheduler}
+              observatoryPosition={observatoryPosition}
+              handleFilter={handleFilter}
+            />
+          </Route>
+          <Route path="/scheduler">
+            <Scheduler
+              schedulerData={schedulerData}
+              updateDelete={updateDelete}
+            />
+          </Route>
+          <Route path="/exoplanets">
+            <Exoplanets />
+          </Route>
+          <Route path="/eclipsingbinaries">
+            <EclipsingBinaries />
+          </Route>
+          <Route path="/object/:objectID">
+            <Objects observatoryPosition={observatoryPosition} />
+          </Route>
+        </Switch>
+        {/* </DarkModeContext.Provider> */}
       </SideNav>
     </ThemeProvider>
   );

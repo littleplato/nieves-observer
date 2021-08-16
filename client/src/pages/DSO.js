@@ -6,9 +6,9 @@ import Button from "@material-ui/core/Button";
 const objectTypes = {
   galaxies: "Galaxy",
   "emission nebulae": "Emission nebula",
+  "planetary nebulae": "Planetary nebula",
   "globular clusters": "Globular cluster",
   "open clusters": "Open cluster",
-  "planetary nebulae": "Planetary nebula",
   "supernova remnants": "Supernova remnant",
 };
 

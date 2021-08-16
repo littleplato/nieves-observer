@@ -1,10 +1,13 @@
 import React from "react";
 import ObjectDetails from "../components/ObjectDetails";
 
-export default function Objects({ observatoryPosition }) {
+export default function Objects({ observatoryPosition, addToScheduler }) {
   return (
     <div>
-      <ObjectDetails observatoryPosition={observatoryPosition} />
+      <ObjectDetails
+        observatoryPosition={observatoryPosition}
+        addToScheduler={(data) => addToScheduler(data)}
+      />
     </div>
   );
 }

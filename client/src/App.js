@@ -170,7 +170,10 @@ function App() {
             <SearchResults searchResults={searchResults} />
           </Route>
           <Route path="/object/:objectID">
-            <Objects observatoryPosition={observatoryPosition} />
+            <Objects
+              observatoryPosition={observatoryPosition}
+              addToScheduler={addToScheduler}
+            />
           </Route>
         </Switch>
       </SideNav>

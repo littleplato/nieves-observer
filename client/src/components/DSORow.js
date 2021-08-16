@@ -44,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
   header: {
     width: 340,
   },
+  menuItem: {
+    fontSize: 12,
+    fontWeight: 700,
+  },
 }));
 
 export default function DSORow(props) {
@@ -54,7 +58,6 @@ export default function DSORow(props) {
   const handleAdd = () => {
     setAnchorEl(null);
     console.log(`${props.dso?.name} added`);
-    // props.addToScheduler(props.dso); //change to props.dso.name
     props.addToScheduler(props.dso.params);
   };
 
@@ -88,14 +91,23 @@ export default function DSORow(props) {
                       <MoreVertIcon />
                     </IconButton>
                     <Menu
-                      id="simple-menu"
                       anchorEl={anchorEl}
                       keepMounted
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
                     >
-                      <MenuItem onClick={handleReadMore}>Read more</MenuItem>
-                      <MenuItem onClick={handleAdd}>Add to list</MenuItem>
+                      <MenuItem
+                        onClick={handleReadMore}
+                        className={classes.menuItem}
+                      >
+                        READ MORE
+                      </MenuItem>
+                      <MenuItem
+                        onClick={handleAdd}
+                        className={classes.menuItem}
+                      >
+                        SAVE OBJECT
+                      </MenuItem>
                     </Menu>
                   </div>
                 }

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ObjectDetails({ observatoryPosition }) {
+export default function ObjectDetails({ observatoryPosition, addToScheduler }) {
   const [objectShow, setObjectShow] = useState(null);
   const params = useParams();
   const classes = useStyles();
@@ -68,6 +68,11 @@ export default function ObjectDetails({ observatoryPosition }) {
     // eslint-disable-next-line
   }, []);
 
+  const handleAdd = () => {
+    addToScheduler(objectShow.params);
+    console.log("adding", objectShow.params);
+  };
+
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
@@ -79,7 +84,7 @@ export default function ObjectDetails({ observatoryPosition }) {
         <div className={classes.details}>
           <CardHeader
             action={
-              <IconButton onClick={() => console.log("add to list")}>
+              <IconButton onClick={handleAdd}>
                 <AddIcon />
               </IconButton>
             }

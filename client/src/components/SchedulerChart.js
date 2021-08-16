@@ -45,29 +45,29 @@ export default function SchedulerChart(props) {
     let plot_data = [];
     for (let i = 0; i < schedulerFullDataArray.length; i++) {
       const parsedData = JSON.parse(
-        schedulerFullDataArray[i].plot.replaceAll("'", '"')
+        schedulerFullDataArray[i].plot
+          .replaceAll("'", '"')
+          .replaceAll("-1.00", "—")
       );
       if (plot_data.length < 1) {
         for (let j = 0; j < parsedData.length; j++) {
           const dataPoint = {
             [schedulerFullDataArray[i].name]: parsedData[j].alt,
           };
-          plot_data.push(dataPoint);
+          const timeAxis = { time: parsedData[j].time };
+          const timePoints = { name: parsedData[j].name };
+          plot_data.push({ ...dataPoint, ...timeAxis, ...timePoints });
         }
       } else {
         for (let j = 0; j < parsedData.length; j++) {
           const newDataPoint = {
             [schedulerFullDataArray[i].name]: parsedData[j].alt,
           };
-          plot_data[j] = { ...plot_data[j], ...newDataPoint };
-          if (i === schedulerFullDataArray.length - 1) {
-            const timeAxis = { time: parsedData[j].time };
-            const timePoints = { name: parsedData[j].name };
-            plot_data[j] = { ...plot_data[j], ...timeAxis, ...timePoints };
-          }
+          plot_data[j] = { ...newDataPoint, ...plot_data[j] };
         }
       }
     }
+    console.log(plot_data);
     return plot_data;
   };
   return (

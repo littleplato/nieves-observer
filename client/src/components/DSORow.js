@@ -116,7 +116,9 @@ export default function DSORow(props) {
         <Grid item xs={12} sm={3}>
           <Paper className={classes.chart}>
             <DSOChart
-              plot={JSON.parse(props.dso?.plot?.replaceAll("'", '"'))}
+              plot={JSON.parse(
+                props.dso?.plot?.replaceAll("'", '"').replaceAll("-1.00", "—")
+              )}
             />
           </Paper>
         </Grid>

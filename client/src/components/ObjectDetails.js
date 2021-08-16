@@ -123,7 +123,9 @@ export default function ObjectDetails({ observatoryPosition }) {
         </Container>
         {objectShow !== null && (
           <ObjectChart
-            plot={JSON.parse(objectShow?.plot?.replaceAll("'", '"'))}
+            plot={JSON.parse(
+              objectShow?.plot?.replaceAll("'", '"').replaceAll("-1.00", "—")
+            )}
           />
         )}
       </Paper>

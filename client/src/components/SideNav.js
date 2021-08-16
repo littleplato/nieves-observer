@@ -141,7 +141,6 @@ export default function SideNav(props) {
           </Link>
         </Container>
         <div />
-
         <div className={classes.options}>
           <Container>
             <Location
@@ -156,7 +155,6 @@ export default function SideNav(props) {
         </div>
         {/* <ObsStats /> */}
         <Divider />
-
         <List>
           {navObjects.map((item, index) => (
             <Link
@@ -175,6 +173,7 @@ export default function SideNav(props) {
             </Link>
           ))}
         </List>
+        {/* <div>About | Contact</div> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

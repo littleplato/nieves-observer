@@ -26,9 +26,10 @@ export default function Scheduler(props) {
       setShowData(data);
     };
     fetchDataInScheduler();
+    // eslint-disable-next-line
   }, [observatoryPosition]);
 
-  return props.schedulerData < 0 ? (
+  return props.schedulerData.length < 1 ? (
     "There's nothing on your schedule."
   ) : showData.state === "loading" ? (
     <CircularProgress color="primary" />

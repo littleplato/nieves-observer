@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   chartTitle: {
     paddingLeft: 25,
-    // paddingBottom: 15,
   },
 }));
 
@@ -47,7 +46,6 @@ const columns = [
   {
     field: "mag",
     headerName: "Mag",
-    // type: "number",
     width: 120,
   },
   {
@@ -60,7 +58,7 @@ const columns = [
 
 export default function SchedulerTable(props) {
   const classes = useStyles();
-  const [showData, setShowData] = useState(props.schedulerData);
+  const [showData, setShowData] = useState(props.showData);
   const [checkedItem, setCheckedItem] = useState();
   const [pageSize, setPageSize] = useState(5);
 

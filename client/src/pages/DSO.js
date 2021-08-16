@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import DSOList from "../components/DSOList";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { useAtom } from "jotai";
+import { observatoryPositionAtom } from "../App";
 
 const objectTypes = {
   galaxies: "Galaxy",
@@ -13,11 +15,12 @@ const objectTypes = {
 };
 
 export default function DSO(props) {
+  const [observatoryPosition] = useAtom(observatoryPositionAtom);
   useEffect(() => {
     const fetchDSO = async () => {
       const res = await fetch("http://127.0.0.1:5000/dso", {
         method: "POST",
-        body: JSON.stringify(props.observatoryPosition),
+        body: JSON.stringify(observatoryPosition),
         headers: {
           "Content-Type": "application/json",
         },
@@ -28,7 +31,7 @@ export default function DSO(props) {
     };
     fetchDSO();
     // eslint-disable-next-line
-  }, []);
+  }, [observatoryPosition]);
 
   const handleFilter = (e) => {
     const selectedType = objectTypes[e.target.lastChild.data];

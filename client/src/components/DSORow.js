@@ -54,7 +54,8 @@ export default function DSORow(props) {
   const handleAdd = () => {
     setAnchorEl(null);
     console.log(`${props.dso?.name} added`);
-    props.addToScheduler(props.dso);
+    // props.addToScheduler(props.dso); //change to props.dso.name
+    props.addToScheduler(props.dso.params);
   };
 
   const handleReadMore = () => {

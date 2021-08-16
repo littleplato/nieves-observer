@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import { atom, useAtom } from "jotai";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
@@ -16,14 +16,14 @@ const defaultPosition = {
   latitude: "-117.7362203",
 };
 
-// export const DarkModeContext = createContext();
 export const darkModeAtom = atom(true);
+export const observatoryPositionAtom = atom(defaultPosition);
 
 function App() {
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
-  // const [darkMode, setDarkMode] = useState(true);
-  const [observatoryPosition, setObservatoryPosition] =
-    useState(defaultPosition);
+  const [observatoryPosition, setObservatoryPosition] = useAtom(
+    observatoryPositionAtom
+  );
   const [objList, setObjList] = useState({ state: "loading" });
   const existingSchedulerData =
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
@@ -123,7 +123,6 @@ function App() {
         locationSelection={locationSelection}
         dateSelection={dateSelection}
       >
-        {/* <DarkModeContext.Provider value={darkMode}> */}
         <Switch>
           <Route exact path="/">
             <DSO
@@ -150,7 +149,6 @@ function App() {
             <Objects observatoryPosition={observatoryPosition} />
           </Route>
         </Switch>
-        {/* </DarkModeContext.Provider> */}
       </SideNav>
     </ThemeProvider>
   );

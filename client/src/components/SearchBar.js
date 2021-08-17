@@ -51,7 +51,6 @@ export default function SearchBar(props) {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("search for", searchInput.current.value);
-    // history.push("/object/" + searchInput.current.value);
     props.handleSearch(searchInput.current.value);
   };
 

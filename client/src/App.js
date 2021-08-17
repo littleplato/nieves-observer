@@ -30,7 +30,7 @@ function App() {
   const existingSchedulerData =
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
   const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({ state: "loading" });
 
   const theme = createTheme({
     palette: {
@@ -118,6 +118,7 @@ function App() {
   };
 
   const handleSearch = (searchTerm) => {
+    setSearchResults({ state: "loading" });
     const fetchSearchResults = async () => {
       const res = await fetch("http://127.0.0.1:5000/search", {
         method: "POST",

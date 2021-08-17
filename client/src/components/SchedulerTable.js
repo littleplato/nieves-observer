@@ -12,12 +12,14 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 900,
   },
   delete: {
+    marginTop: 15,
     marginBottom: 15,
   },
   chart: {
     height: 440,
     marginTop: 30,
     paddingTop: 15,
+    paddingBottom: -10,
   },
   chartTitle: {
     paddingLeft: 25,
@@ -87,6 +89,9 @@ export default function SchedulerTable(props) {
 
   return (
     <div className={classes.root}>
+      <Typography gutterBottom variant="h1">
+        Your saved objects
+      </Typography>
       <Button
         variant="outlined"
         className={classes.delete}
@@ -107,7 +112,7 @@ export default function SchedulerTable(props) {
         />
       </div>
       <Paper className={classes.chart}>
-        <Typography variant="h6" className={classes.chartTitle}>
+        <Typography variant="h6" className={classes.chartTitle} gutterBottom>
           Elevation of selected objects
         </Typography>
         <SchedulerChart schedulerData={showData} />

@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import SearchShow from "../components/SearchShow";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,9 +14,13 @@ export default function SearchResults(props) {
   const classes = useStyles();
   const searchShow = props.searchResults;
 
-  return props.searchResults.length === 0 ? (
-    "Sorry, nothing found."
-  ) : (
+  return searchShow.state === "loading" ? (
+    <>
+      Searching for your object...
+      <p />
+      <CircularProgress />
+    </>
+  ) : searchShow.length > 0 ? (
     <div className={classes.root}>
       <Grid container spacing={2}>
         {searchShow?.map((searchItem, i) => (
@@ -24,5 +30,12 @@ export default function SearchResults(props) {
         ))}
       </Grid>
     </div>
+  ) : (
+    <>
+      <Typography variant="h4" gutterBottom>
+        Sorry, I found nothing.
+      </Typography>
+      Please try a different search term.
+    </>
   );
 }

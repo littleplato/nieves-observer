@@ -19,7 +19,7 @@ export default function Objects({ observatoryPosition, addToScheduler }) {
         },
       });
       const objectData = await res.json();
-      console.log(objectData);
+      console.log("fetched individual object data", objectData);
       setObjectShow(objectData);
     };
     fetchObjectDetails();

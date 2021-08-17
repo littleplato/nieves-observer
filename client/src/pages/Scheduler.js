@@ -22,12 +22,11 @@ export default function Scheduler(props) {
         },
       });
       const data = await res.json();
-      console.log(data);
+      console.log("Scheduler has fetched", data);
       setShowData(data);
     };
     fetchDataInScheduler();
-    // eslint-disable-next-line
-  }, [observatoryPosition]);
+  }, [observatoryPosition, props.schedulerData]);
 
   return props.schedulerData.length < 1 ? (
     "There's nothing on your schedule."

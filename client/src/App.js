@@ -83,7 +83,7 @@ function App() {
   };
 
   const addToScheduler = (data) => {
-    console.log("this goes down:", [...schedulerData, data]);
+    console.log("Scheduler now consists of", [...schedulerData, data]);
     setSchedulerData([...schedulerData, data]);
     localStorage.setItem(
       "savedSchedule",
@@ -105,7 +105,7 @@ function App() {
         },
       });
       const data = await res.json();
-      console.log(data);
+      console.log(`Server has yielded for ${selectedType}`, data);
       setObjList(data);
     };
     refetchFilteredDSO();
@@ -128,7 +128,7 @@ function App() {
         },
       });
       const searchData = await res.json();
-      console.log(searchData);
+      console.log("Sever has yielded for", searchTerm, searchData);
       setSearchResults(searchData);
     };
     fetchSearchResults();

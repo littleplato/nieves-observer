@@ -74,7 +74,7 @@ export default function SchedulerTable(props) {
   }));
 
   const handleCheck = (e) => {
-    console.log(e);
+    console.log("Fields checked:", e);
     setCheckedItem(e);
   };
 

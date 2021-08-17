@@ -44,12 +44,14 @@ export default function SchedulerChart(props) {
   const convertPlotsToRecharts = (schedulerFullDataArray) => {
     let plot_data = [];
     for (let i = 0; i < schedulerFullDataArray.length; i++) {
+      // to parse the strings
       const parsedData = JSON.parse(
         schedulerFullDataArray[i].plot
           .replaceAll("'", '"')
           .replaceAll("-1.00", "—")
       );
       if (plot_data.length < 1) {
+        //initial parameters (time and 1st object)
         for (let j = 0; j < parsedData.length; j++) {
           const dataPoint = {
             [schedulerFullDataArray[i].name]: parsedData[j].alt,
@@ -59,6 +61,7 @@ export default function SchedulerChart(props) {
           plot_data.push({ ...dataPoint, ...timeAxis, ...timePoints });
         }
       } else {
+        // to add additional objects
         for (let j = 0; j < parsedData.length; j++) {
           const newDataPoint = {
             [schedulerFullDataArray[i].name]: parsedData[j].alt,
@@ -67,9 +70,10 @@ export default function SchedulerChart(props) {
         }
       }
     }
-    console.log(plot_data);
+    // console.log(plot_data);
     return plot_data;
   };
+
   return (
     <ResponsiveContainer>
       <LineChart

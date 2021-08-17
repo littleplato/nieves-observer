@@ -27,7 +27,7 @@ export default function DSO(props) {
         },
       });
       const data = await res.json();
-      console.log(data);
+      console.log("Initial load upon landing:", data);
       props.sendObjList(data);
     };
     fetchDSO();
@@ -36,7 +36,7 @@ export default function DSO(props) {
 
   const handleFilter = (e) => {
     const selectedType = objectTypes[e.target.lastChild.data];
-    console.log(selectedType);
+    console.log("Filtering for", selectedType);
     props.handleFilter(selectedType);
   };
 

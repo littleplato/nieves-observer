@@ -23,8 +23,8 @@ import TollIcon from "@material-ui/icons/Toll";
 import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import logoLight from "../assets/logo-light.png";
-import logoDark from "../assets/logo-dark.png";
+import logoLight from "../assets/logoLight.svg";
+import logoDark from "../assets/logoDark.svg";
 import SearchBar from "./SearchBar";
 // import ObsStats from "./ObsStats";
 
@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   logo: {
-    paddingTop: 20,
+    paddingTop: 8,
+    marginLeft: 3,
     paddingBottom: 15,
   },
   options: {
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 20,
   },
   icon: {
-    minWidth: 40,
+    minWidth: 35,
   },
   nav: {
     flexGrow: 1,
@@ -125,21 +126,21 @@ export default function SideNav(props) {
         }}
         anchor="left"
       >
-        <Container>
-          <Link
-            component={RouterLink}
-            color="inherit"
-            to="/"
-            style={{ textDecoration: "none" }}
-          >
-            <img
-              src={props.darkMode ? logoDark : logoLight}
-              alt="logo"
-              width={drawerWidth - 50}
-              className={classes.logo}
-            />
-          </Link>
-        </Container>
+        {/* <Container> */}
+        <Link
+          component={RouterLink}
+          color="inherit"
+          to="/"
+          style={{ textDecoration: "none" }}
+        >
+          <img
+            src={props.darkMode ? logoDark : logoLight}
+            alt="logo"
+            width={drawerWidth - 25}
+            className={classes.logo}
+          />
+        </Link>
+
         <div />
         <div className={classes.options}>
           <Container>
@@ -153,7 +154,7 @@ export default function SideNav(props) {
             />
           </Container>
         </div>
-        {/* <ObsStats /> */}
+
         <Divider />
         <List>
           {navObjects.map((item, index) => (
@@ -167,6 +168,7 @@ export default function SideNav(props) {
               <ListItem button key={item.text}>
                 <ListItemIcon className={classes.icon}>
                   {item.icon}
+                  {/* <img src={newMoon} alt={item.text} width={25} /> */}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>

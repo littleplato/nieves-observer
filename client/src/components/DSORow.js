@@ -57,12 +57,12 @@ export default function DSORow(props) {
 
   const handleAdd = () => {
     setAnchorEl(null);
-    console.log(`${props.dso?.name} added`);
+    console.log(`${props.dso.name} added`);
     props.addToScheduler(props.dso.params);
   };
 
   const handleReadMore = () => {
-    history.push("/object/" + props.dso?.params);
+    history.push("/object/" + props.dso.params);
   };
 
   const handleClick = (event) => {
@@ -80,8 +80,8 @@ export default function DSORow(props) {
           <Card className={classes.root}>
             <CardMedia
               className={classes.cover}
-              image={props.dso?.image}
-              title={props.dso?.name}
+              image={props.dso.image}
+              title={props.dso.name}
             />
             <div className={classes.details}>
               <CardHeader
@@ -111,15 +111,15 @@ export default function DSORow(props) {
                     </Menu>
                   </div>
                 }
-                title={props.dso?.name}
-                subheader={props.dso?.type}
+                title={props.dso.name}
+                subheader={props.dso.type}
                 className={classes.header}
               />
               <CardContent className={classes.content}>
                 <Typography variant="subtitle2" color="textSecondary">
-                  Apparent Magnitude: {props.dso?.mag} mag <br />
-                  Maximum Altitude: +{props.dso?.max_alt.toFixed(2)}° <br />
-                  Distance: {props.dso?.dist} kly
+                  Apparent Magnitude: {props.dso.mag} mag <br />
+                  Maximum Altitude: +{props.dso.max_alt.toFixed(2)}° <br />
+                  Distance: {props.dso.dist} kly
                 </Typography>
               </CardContent>
             </div>
@@ -129,7 +129,7 @@ export default function DSORow(props) {
           <Paper className={classes.chart}>
             <DSOChart
               plot={JSON.parse(
-                props.dso?.plot?.replaceAll("'", '"').replaceAll("-1.00", "—")
+                props.dso.plot.replaceAll("'", '"').replaceAll("-1.00", "—")
               )}
             />
           </Paper>

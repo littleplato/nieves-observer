@@ -51,8 +51,8 @@ export default function SearchShow(props) {
           <Typography variant="subtitle2" color="textSecondary" component="p">
             Common Name: {props.searchItem.common} <br />
             Other Identifiers: {props.searchItem.ngcic} <br />
-            Apparent Magnitude: {props.searchItem?.mag} mag <br />
-            Distance: {props.searchItem?.dist} kly
+            Apparent Magnitude: {props.searchItem.mag} mag <br />
+            Distance: {props.searchItem.dist} kly
           </Typography>
         </CardContent>
       </CardActionArea>

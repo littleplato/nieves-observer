@@ -82,9 +82,9 @@ export default function SchedulerTable(props) {
     const newShowData = showData.filter((dso) =>
       checkedItem.every((item) => item !== dso.name)
     );
-    console.log(newShowData);
     setShowData(newShowData);
-    props.updateDelete(newShowData);
+    const dsoNameOnly = newShowData.map((dso) => dso.params);
+    props.updateDelete(dsoNameOnly);
   };
 
   return (

@@ -11,7 +11,8 @@ const objectTypes = {
   "planetary nebulae": "Planetary nebula",
   "globular clusters": "Globular cluster",
   "open clusters": "Open cluster",
-  "supernova remnants": "Supernova remnant",
+  asterism: "Asterism",
+  // "supernova remnants": "Supernova remnant",
 };
 
 export default function DSO(props) {

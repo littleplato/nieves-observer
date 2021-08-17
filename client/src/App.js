@@ -168,7 +168,10 @@ function App() {
             <EclipsingBinaries />
           </Route>
           <Route path="/search">
-            <SearchResults searchResults={searchResults} />
+            <SearchResults
+              searchResults={searchResults}
+              addToScheduler={addToScheduler}
+            />
           </Route>
           <Route path="/object/:objectID">
             <Objects

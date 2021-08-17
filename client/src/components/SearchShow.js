@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -24,30 +25,38 @@ const useStyles = makeStyles({
 export default function SearchShow(props) {
   const classes = useStyles();
   const history = useHistory();
+  const [buttonState, setButtonState] = useState(false);
 
   const handleAction = () => {
-    // add clear searchResults function
     history.push("/object/" + props.searchItem.params);
+  };
+
+  const handleAdd = () => {
+    props.addToScheduler(props.searchItem.params);
+    setButtonState(true);
+    console.log("adding to scheduler", props.searchItem.params);
   };
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={handleAction}>
+      <CardActionArea>
         <CardMedia
           className={classes.media}
           image={props.searchItem.image}
           title={props.searchItem.name}
+          onClick={handleAction}
         />
         <CardHeader
           action={
-            <IconButton onClick={() => console.log("add to list")}>
+            <IconButton onClick={handleAdd} disabled={buttonState}>
               <AddIcon />
             </IconButton>
           }
           title={props.searchItem.name}
           subheader={props.searchItem.type}
+          onClick={handleAction}
         />
-        <CardContent className={classes.content}>
+        <CardContent className={classes.content} onClick={handleAction}>
           <Typography variant="subtitle2" color="textSecondary" component="p">
             Common Name: {props.searchItem.common} <br />
             Other Identifiers: {props.searchItem.ngcic} <br />

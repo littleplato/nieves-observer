@@ -25,7 +25,10 @@ export default function SearchResults(props) {
       <Grid container spacing={2}>
         {searchShow?.map((searchItem, i) => (
           <Grid item key={i} xs={12} sm={6} md={4}>
-            <SearchShow searchItem={searchItem} />
+            <SearchShow
+              searchItem={searchItem}
+              addToScheduler={(data) => props.addToScheduler(data)}
+            />
           </Grid>
         ))}
       </Grid>

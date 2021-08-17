@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -49,9 +49,11 @@ export default function ObjectDetails({
   objectShow,
 }) {
   const classes = useStyles();
+  const [buttonState, setButtonState] = useState(false);
 
   const handleAdd = () => {
     addToScheduler(objectShow.params);
+    setButtonState(true);
     console.log("adding", objectShow.params);
   };
 
@@ -66,7 +68,7 @@ export default function ObjectDetails({
         <div className={classes.details}>
           <CardHeader
             action={
-              <IconButton onClick={handleAdd}>
+              <IconButton onClick={handleAdd} disabled={buttonState}>
                 <AddIcon />
               </IconButton>
             }

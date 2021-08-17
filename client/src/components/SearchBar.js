@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
@@ -47,11 +47,18 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar(props) {
   const classes = useStyles();
   const searchInput = useRef();
+  const [placeholder, setPlaceholder] = useState("Search...");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("search for", searchInput.current.value);
-    props.handleSearch(searchInput.current.value);
+    if (searchInput.current.value === "") {
+      console.log("can't search for empty term");
+      setPlaceholder("Please input something!");
+    } else {
+      setPlaceholder("Search...");
+      console.log("Searching for", searchInput.current.value);
+      props.handleSearch(searchInput.current.value);
+    }
   };
 
   return (
@@ -62,7 +69,7 @@ export default function SearchBar(props) {
       <form onSubmit={handleSearch}>
         <InputBase
           inputRef={searchInput}
-          placeholder="Search…"
+          placeholder={placeholder}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,

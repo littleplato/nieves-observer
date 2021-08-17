@@ -29,18 +29,18 @@ const columns = [
   {
     field: "type",
     headerName: "Type",
-    width: 130,
+    width: 150,
   },
   {
     field: "ra",
     headerName: "RA",
-    width: 120,
+    width: 130,
     sortable: false,
   },
   {
     field: "dec",
     headerName: "Dec",
-    width: 120,
+    width: 130,
     sortable: false,
   },
   {
@@ -49,9 +49,9 @@ const columns = [
     width: 120,
   },
   {
-    field: "comments",
-    headerName: "Notes",
-    width: 200,
+    field: "maxAlt",
+    headerName: "Max Alt",
+    width: 140,
     editable: true,
   },
 ];
@@ -68,7 +68,7 @@ export default function SchedulerTable(props) {
     ra: dso.ra,
     dec: dso.dec,
     mag: dso.mag,
-    comments: "Your notes here",
+    maxAlt: dso.max_alt.toFixed(2) + "°",
   }));
 
   const handleCheck = (e) => {

@@ -17,6 +17,7 @@ const objectTypes = {
 
 export default function DSO(props) {
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
+
   useEffect(() => {
     const fetchDSO = async () => {
       const res = await fetch("http://127.0.0.1:5000/dso", {
@@ -27,7 +28,7 @@ export default function DSO(props) {
         },
       });
       const data = await res.json();
-      console.log("Initial load upon landing:", data);
+      console.log("Fetching for DSO", data);
       props.sendObjList(data);
     };
     fetchDSO();
@@ -43,8 +44,7 @@ export default function DSO(props) {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Deep Sky Objects for{" "}
-        {new Date(props.observatoryPosition?.date).toDateString()}
+        Deep Sky Objects for {new Date(observatoryPosition.date).toDateString()}
       </Typography>
       {Object.keys(objectTypes).map((object, i) => (
         <Button

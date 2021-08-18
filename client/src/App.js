@@ -31,6 +31,7 @@ function App() {
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
   const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
   const [searchResults, setSearchResults] = useState({ state: "loading" });
+  const [searchTerm, setSearchTerm] = useState();
 
   const theme = createTheme({
     palette: {
@@ -46,39 +47,13 @@ function App() {
     },
   });
 
-  const positionUpdate = (newObservatoryPosition) => {
-    const refetchDSO = async () => {
-      const res = await fetch("http://127.0.0.1:5000/dso", {
-        method: "POST",
-        body: JSON.stringify(newObservatoryPosition),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      setObjList(data);
-    };
-    refetchDSO();
-  };
-
   const locationSelection = (locationData) => {
-    const newObservatoryPosition = {
-      ...observatoryPosition,
-      ...locationData,
-    };
     setObservatoryPosition({ ...observatoryPosition, ...locationData });
-    positionUpdate(newObservatoryPosition);
     setObjList({ state: "loading" });
   };
 
   const dateSelection = (dateData) => {
-    const newObservatoryPosition = {
-      ...observatoryPosition,
-      ...dateData,
-    };
     setObservatoryPosition({ ...observatoryPosition, date: dateData });
-    positionUpdate(newObservatoryPosition);
     setObjList({ state: "loading" });
   };
 
@@ -117,19 +92,21 @@ function App() {
     localStorage.setItem("savedSchedule", JSON.stringify(data));
   };
 
-  const handleSearch = (searchTerm) => {
+  const handleSearch = (searchInput) => {
     setSearchResults({ state: "loading" });
     const fetchSearchResults = async () => {
       const res = await fetch("http://127.0.0.1:5000/search", {
         method: "POST",
-        body: JSON.stringify({ search: searchTerm }),
+        body: JSON.stringify({ search: searchInput }),
         headers: {
           "Content-Type": "application/json",
         },
       });
       const searchData = await res.json();
-      console.log("Sever has yielded for", searchTerm, searchData);
+      console.log("Sever has yielded for", searchInput, searchData);
+      // setSearchResults({ searchTerm: searchTerm, searchData: searchData });
       setSearchResults(searchData);
+      setSearchTerm(searchInput);
     };
     fetchSearchResults();
     history.push("/search");
@@ -170,6 +147,7 @@ function App() {
           <Route path="/search">
             <SearchResults
               searchResults={searchResults}
+              searchTerm={searchTerm}
               addToScheduler={addToScheduler}
             />
           </Route>

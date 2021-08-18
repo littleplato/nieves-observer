@@ -58,6 +58,7 @@ export default function SearchBar(props) {
       setPlaceholder("Search...");
       console.log("Searching for", searchInput.current.value);
       props.handleSearch(searchInput.current.value);
+      e.target.reset();
     }
   };
 

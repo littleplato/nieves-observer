@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { observatoryPositionAtom } from "../App";
 import { useParams } from "react-router-dom";
 import ObjectDetails from "../components/ObjectDetails";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 
-export default function Objects({ observatoryPosition, addToScheduler }) {
+export default function Objects({ addToScheduler }) {
   const params = useParams();
   const [objectShow, setObjectShow] = useState(null);
+  const [observatoryPosition] = useAtom(observatoryPositionAtom);
 
   useEffect(() => {
+    setObjectShow(null);
     const objectParams = params.objectID;
     const fetchObjectDetails = async () => {
       const res = await fetch(`http://127.0.0.1:5000/dso/${objectParams}`, {
@@ -24,7 +28,7 @@ export default function Objects({ observatoryPosition, addToScheduler }) {
     };
     fetchObjectDetails();
     // eslint-disable-next-line
-  }, []);
+  }, [observatoryPosition]);
 
   return objectShow === null ? (
     <>

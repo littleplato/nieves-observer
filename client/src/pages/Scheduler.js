@@ -3,12 +3,15 @@ import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
 import SchedulerTable from "../components/SchedulerTable";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 export default function Scheduler(props) {
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
   const [showData, setShowData] = useState({ state: "loading" });
 
   useEffect(() => {
+    setShowData({ state: "loading" });
     const fetchDataInScheduler = async () => {
       const infoToServer = {
         savedData: props.schedulerData,
@@ -29,7 +32,12 @@ export default function Scheduler(props) {
   }, [observatoryPosition, props.schedulerData]);
 
   return props.schedulerData.length < 1 ? (
-    "There's nothing on your schedule."
+    <div>
+      <Typography variant="h6" gutterBottom>
+        There's nothing on your schedule.
+      </Typography>
+      <Button variant="outlined">Browse for deep sky objects</Button>
+    </div>
   ) : showData.state === "loading" ? (
     <CircularProgress color="primary" />
   ) : (

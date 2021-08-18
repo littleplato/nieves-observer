@@ -22,6 +22,9 @@ export default function SearchResults(props) {
     </>
   ) : searchShow.length > 0 ? (
     <div className={classes.root}>
+      <Typography variant="h5" gutterBottom>
+        Search results for "{props.searchTerm}"
+      </Typography>
       <Grid container spacing={2}>
         {searchShow?.map((searchItem, i) => (
           <Grid item key={i} xs={12} sm={6} md={4}>
@@ -36,7 +39,7 @@ export default function SearchResults(props) {
   ) : (
     <>
       <Typography variant="h4" gutterBottom>
-        Sorry, I found nothing.
+        Sorry, I found nothing for "{props.searchTerm}"
       </Typography>
       Please try a different search term.
     </>

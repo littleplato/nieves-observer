@@ -35,7 +35,6 @@ export default function DSO(props) {
       setShowDSO(data);
     };
     fetchDSO();
-    // eslint-disable-next-line
   }, [observatoryPosition]);
 
   const handleFilter = (e) => {

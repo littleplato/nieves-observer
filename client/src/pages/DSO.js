@@ -68,7 +68,7 @@ export default function DSO(props) {
           {new Date(observatoryPosition.date).toDateString()}
         </Typography>
       </Fade>
-      <Fade in={true} timeout={1000} style={{ transitionDelay: "200ms" }}>
+      <Fade in={true} timeout={1000}>
         <div>
           {Object.keys(objectTypes).map((object, i) => (
             <Button

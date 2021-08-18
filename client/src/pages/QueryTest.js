@@ -21,13 +21,16 @@ export default function QueryTest() {
 
   const fetchDSO = async () => {
     console.log(observatoryPosition);
-    const res = await fetch(`${process.env.SERVER_URL}/query/${filterDSO}`, {
-      method: "POST",
-      body: JSON.stringify(observatoryPosition),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/query/${filterDSO}`,
+      {
+        method: "POST",
+        body: JSON.stringify(observatoryPosition),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return res.json();
   };
 

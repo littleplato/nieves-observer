@@ -75,7 +75,7 @@ function App() {
   const handleSearch = (searchInput) => {
     setSearchResults({ state: "loading" });
     const fetchSearchResults = async () => {
-      const res = await fetch(process.env.SERVER_URL + "/search", {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/search", {
         method: "POST",
         body: JSON.stringify({ search: searchInput }),
         headers: {

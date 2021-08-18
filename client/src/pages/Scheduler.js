@@ -20,7 +20,7 @@ export default function Scheduler(props) {
         savedData: props.schedulerData,
         ...observatoryPosition,
       };
-      const res = await fetch(process.env.SERVER_URL + "/scheduler", {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/scheduler", {
         method: "POST",
         body: JSON.stringify(infoToServer),
         headers: {

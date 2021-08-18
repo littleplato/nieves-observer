@@ -25,7 +25,7 @@ export default function DSO(props) {
   useEffect(() => {
     setShowDSO({ state: "loading" });
     const fetchDSO = async () => {
-      const res = await fetch(process.env.SERVER_URL + "/dso", {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/dso", {
         method: "POST",
         body: JSON.stringify(observatoryPosition),
         headers: {

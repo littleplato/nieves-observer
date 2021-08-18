@@ -17,13 +17,16 @@ export default function Objects({ addToScheduler }) {
     // setObjectShow(null);
     const objectParams = params.objectID;
     const fetchObjectDetails = async () => {
-      const res = await fetch(`${process.env.SERVER_URL}/dso/${objectParams}`, {
-        method: "POST",
-        body: JSON.stringify(observatoryPosition),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/dso/${objectParams}`,
+        {
+          method: "POST",
+          body: JSON.stringify(observatoryPosition),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const objectData = await res.json();
       console.log("fetched individual object data", objectData);
       setObjectShow(objectData);

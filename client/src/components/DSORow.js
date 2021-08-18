@@ -13,6 +13,12 @@ import DSOChart from "./DSOChart";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const cardHeight = 180;
 
@@ -48,17 +54,22 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     fontWeight: 700,
   },
+  alert: {
+    backgroundColor: "#455a64",
+  },
 }));
 
 export default function DSORow(props) {
   const classes = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleAdd = () => {
     setAnchorEl(null);
     console.log(`${props.dso.name} added`);
     props.addToScheduler(props.dso.params);
+    setOpenSnackbar(true);
   };
 
   const handleReadMore = () => {
@@ -71,6 +82,13 @@ export default function DSORow(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
   };
 
   return (
@@ -135,6 +153,15 @@ export default function DSORow(props) {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} className={classes.alert}>
+          Added {props.dso.name} to scheduler!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

@@ -3,9 +3,9 @@ import DSORow from "./DSORow";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function DSOList(props) {
-  const mapData = props.objList;
+  const mapData = props.dsoData;
 
-  return props.objList.state === "loading" ? (
+  return props.dsoData.state === "loading" ? (
     <CircularProgress />
   ) : (
     mapData?.map((dso, i) => (

@@ -26,7 +26,6 @@ function App() {
   const [observatoryPosition, setObservatoryPosition] = useAtom(
     observatoryPositionAtom
   );
-  const [objList, setObjList] = useState({ state: "loading" });
   const existingSchedulerData =
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
   const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
@@ -49,12 +48,10 @@ function App() {
 
   const locationSelection = (locationData) => {
     setObservatoryPosition({ ...observatoryPosition, ...locationData });
-    setObjList({ state: "loading" });
   };
 
   const dateSelection = (dateData) => {
     setObservatoryPosition({ ...observatoryPosition, date: dateData });
-    setObjList({ state: "loading" });
   };
 
   const addToScheduler = (data) => {
@@ -64,26 +61,6 @@ function App() {
       "savedSchedule",
       JSON.stringify([...schedulerData, data])
     );
-  };
-
-  const handleFilter = (selectedType) => {
-    setObjList({ state: "loading" });
-    const refetchFilteredDSO = async () => {
-      const res = await fetch("http://127.0.0.1:5000/dso/filter", {
-        method: "POST",
-        body: JSON.stringify({
-          ...observatoryPosition,
-          dso_type: selectedType,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(`Server has yielded for ${selectedType}`, data);
-      setObjList(data);
-    };
-    refetchFilteredDSO();
   };
 
   const updateDelete = (data) => {
@@ -104,7 +81,6 @@ function App() {
       });
       const searchData = await res.json();
       console.log("Sever has yielded for", searchInput, searchData);
-      // setSearchResults({ searchTerm: searchTerm, searchData: searchData });
       setSearchResults(searchData);
       setSearchTerm(searchInput);
     };
@@ -125,11 +101,8 @@ function App() {
         <Switch>
           <Route exact path="/">
             <DSO
-              objList={objList}
-              sendObjList={(data) => setObjList(data)}
               addToScheduler={addToScheduler}
               observatoryPosition={observatoryPosition}
-              handleFilter={handleFilter}
             />
           </Route>
           <Route path="/scheduler">

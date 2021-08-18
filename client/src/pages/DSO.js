@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DSOList from "../components/DSOList";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
+// import { useQuery } from "react-query";
 
 const objectTypes = {
   galaxies: "Galaxy",
@@ -11,14 +12,16 @@ const objectTypes = {
   "planetary nebulae": "Planetary nebula",
   "globular clusters": "Globular cluster",
   "open clusters": "Open cluster",
-  asterism: "Asterism",
+  asterisms: "Asterism",
   // "supernova remnants": "Supernova remnant",
 };
 
 export default function DSO(props) {
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
+  const [showDSO, setShowDSO] = useState({ state: "loading" });
 
   useEffect(() => {
+    setShowDSO({ state: "loading" });
     const fetchDSO = async () => {
       const res = await fetch("http://127.0.0.1:5000/dso", {
         method: "POST",
@@ -29,16 +32,31 @@ export default function DSO(props) {
       });
       const data = await res.json();
       console.log("Fetching for DSO", data);
-      props.sendObjList(data);
+      setShowDSO(data);
     };
     fetchDSO();
     // eslint-disable-next-line
   }, [observatoryPosition]);
 
   const handleFilter = (e) => {
+    setShowDSO({ state: "loading" });
     const selectedType = objectTypes[e.target.lastChild.data];
-    console.log("Filtering for", selectedType);
-    props.handleFilter(selectedType);
+    const refetchFilteredDSO = async () => {
+      const res = await fetch("http://127.0.0.1:5000/dso/filter", {
+        method: "POST",
+        body: JSON.stringify({
+          ...observatoryPosition,
+          dso_type: selectedType,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(`Server has yielded for ${selectedType}`, data);
+      setShowDSO(data);
+    };
+    refetchFilteredDSO();
   };
 
   return (
@@ -57,7 +75,7 @@ export default function DSO(props) {
       ))}
       <p />
       <DSOList
-        objList={props.objList}
+        dsoData={showDSO}
         addToScheduler={(selected) => props.addToScheduler(selected)}
       />
     </div>

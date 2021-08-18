@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import SearchShow from "../components/SearchShow";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
-import error from "../assets/error.png";
+import error from "../assets/err.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -39,7 +39,12 @@ export default function Scheduler(props) {
       <Button variant="outlined">Browse for deep sky objects</Button>
     </div>
   ) : showData.state === "loading" ? (
-    <CircularProgress color="primary" />
+    <div>
+      <Typography variant="h6" gutterBottom>
+        Loading your saved objects...
+      </Typography>
+      <CircularProgress color="primary" />
+    </div>
   ) : (
     <SchedulerTable
       showData={showData}

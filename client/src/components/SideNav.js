@@ -66,6 +66,12 @@ const useStyles = makeStyles((theme) => ({
   nav: {
     flexGrow: 1,
   },
+  footer: {
+    position: "fixed",
+    bottom: 0,
+    textAlign: "center",
+    paddingBottom: 12,
+  },
 }));
 
 const navObjects = [
@@ -176,6 +182,13 @@ export default function SideNav(props) {
           ))}
         </List>
         {/* <div>About | Contact</div> */}
+        <div className={classes.footer}>
+          <Container>
+            <Typography variant="caption" style={{ fontWeight: 800 }}>
+              A little web app by Wee Jerrick.
+            </Typography>
+          </Container>
+        </div>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

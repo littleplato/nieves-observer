@@ -12,7 +12,7 @@ export default function Objects({ addToScheduler }) {
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
 
   useEffect(() => {
-    setObjectShow(null);
+    // setObjectShow(null);
     const objectParams = params.objectID;
     const fetchObjectDetails = async () => {
       const res = await fetch(`http://127.0.0.1:5000/dso/${objectParams}`, {
@@ -27,8 +27,7 @@ export default function Objects({ addToScheduler }) {
       setObjectShow(objectData);
     };
     fetchObjectDetails();
-    // eslint-disable-next-line
-  }, [observatoryPosition]);
+  }, [observatoryPosition, params.objectID]);
 
   return objectShow === null ? (
     <>

@@ -16,7 +16,10 @@ export default function Exoplanets() {
       <Typography variant="h1" gutterBottom>
         Upcoming Exoplanet Transits
       </Typography>
-      <Typography>Transits observable from {observatory}</Typography>
+      <Typography gutterBottom>
+        Transits observable from {observatory}
+      </Typography>
+      <p />
       <ExoplanetList />
     </div>
   );

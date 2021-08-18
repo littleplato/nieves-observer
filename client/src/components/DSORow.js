@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
   },
   alert: {
-    backgroundColor: "#455a64",
+    backgroundColor: "#004d40",
   },
 }));
 

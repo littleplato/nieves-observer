@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
 import Fade from "@material-ui/core/Fade";
-// import LoadingRows from "../components/LoadingRows";
-// import { useQuery } from "react-query";
+import dotenv from "dotenv";
+dotenv.config();
 
 const objectTypes = {
   galaxies: "Galaxy",
@@ -25,7 +25,7 @@ export default function DSO(props) {
   useEffect(() => {
     setShowDSO({ state: "loading" });
     const fetchDSO = async () => {
-      const res = await fetch("http://127.0.0.1:5000/dso", {
+      const res = await fetch(process.env.SERVER_URL + "/dso", {
         method: "POST",
         body: JSON.stringify(observatoryPosition),
         headers: {

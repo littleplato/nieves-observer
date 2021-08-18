@@ -10,6 +10,9 @@ import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 import Objects from "./pages/Objects";
 import SearchResults from "./pages/SearchResults";
+import QueryTest from "./pages/QueryTest";
+import dotenv from "dotenv";
+dotenv.config();
 
 const defaultPosition = {
   date: new Date().toISOString().slice(0, 10) + " 07:00:00",
@@ -72,7 +75,7 @@ function App() {
   const handleSearch = (searchInput) => {
     setSearchResults({ state: "loading" });
     const fetchSearchResults = async () => {
-      const res = await fetch("http://127.0.0.1:5000/search", {
+      const res = await fetch(process.env.SERVER_URL + "/search", {
         method: "POST",
         body: JSON.stringify({ search: searchInput }),
         headers: {
@@ -129,6 +132,9 @@ function App() {
               observatoryPosition={observatoryPosition}
               addToScheduler={addToScheduler}
             />
+          </Route>
+          <Route path="/querytest">
+            <QueryTest />
           </Route>
         </Switch>
       </SideNav>

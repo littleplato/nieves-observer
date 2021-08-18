@@ -6,6 +6,8 @@ import SchedulerTable from "../components/SchedulerTable";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Scheduler(props) {
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
@@ -18,7 +20,7 @@ export default function Scheduler(props) {
         savedData: props.schedulerData,
         ...observatoryPosition,
       };
-      const res = await fetch("http://127.0.0.1:5000/scheduler", {
+      const res = await fetch(process.env.SERVER_URL + "/scheduler", {
         method: "POST",
         body: JSON.stringify(infoToServer),
         headers: {

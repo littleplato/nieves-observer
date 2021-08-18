@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import ObjectDetails from "../components/ObjectDetails";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Objects({ addToScheduler }) {
   const params = useParams();
@@ -15,7 +17,7 @@ export default function Objects({ addToScheduler }) {
     // setObjectShow(null);
     const objectParams = params.objectID;
     const fetchObjectDetails = async () => {
-      const res = await fetch(`http://127.0.0.1:5000/dso/${objectParams}`, {
+      const res = await fetch(`${process.env.SERVER_URL}/dso/${objectParams}`, {
         method: "POST",
         body: JSON.stringify(observatoryPosition),
         headers: {

@@ -69,7 +69,7 @@ export default function ExoplanetRow({ dummyData }) {
                 <Grid container spacing={4}>
                   <Grid item xs={6} sm={6}>
                     <Typography variant="subtitle2" color="textSecondary">
-                      Magnitude: {dummyData.mag} <br />
+                      V Mag: {dummyData.mag} <br />
                       RA: {dummyData.ra} <br />
                       Dec: {dummyData.dec} <br />
                     </Typography>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
+import { Link as RouterLink } from "react-router-dom";
 import SchedulerTable from "../components/SchedulerTable";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
@@ -36,7 +37,9 @@ export default function Scheduler(props) {
       <Typography variant="h6" gutterBottom>
         There's nothing on your schedule.
       </Typography>
-      <Button variant="outlined">Browse for deep sky objects</Button>
+      <RouterLink to="/" style={{ textDecoration: "none" }}>
+        <Button variant="outlined">Browse for deep sky objects</Button>
+      </RouterLink>
     </div>
   ) : showData.state === "loading" ? (
     <div>

@@ -185,7 +185,7 @@ export default function SideNav(props) {
         <div className={classes.footer}>
           <Container>
             <Typography variant="caption" style={{ fontWeight: 800 }}>
-              A little web app by Wee Jerrick.
+              A full-stack app by Wee Jerrick.
             </Typography>
           </Container>
         </div>

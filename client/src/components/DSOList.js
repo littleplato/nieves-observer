@@ -1,12 +1,16 @@
 import React from "react";
 import DSORow from "./DSORow";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LoadingRows from "../components/LoadingRows";
 
 export default function DSOList(props) {
   const mapData = props.dsoData;
 
   return props.dsoData.state === "loading" ? (
-    <CircularProgress />
+    <div>
+      <LoadingRows />
+      <LoadingRows />
+      <LoadingRows />
+    </div>
   ) : (
     mapData?.map((dso, i) => (
       <DSORow

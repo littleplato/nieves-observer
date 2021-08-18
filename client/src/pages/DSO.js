@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
+import Fade from "@material-ui/core/Fade";
+// import LoadingRows from "../components/LoadingRows";
 // import { useQuery } from "react-query";
 
 const objectTypes = {
@@ -60,18 +62,25 @@ export default function DSO(props) {
 
   return (
     <div>
-      <Typography variant="h4" gutterBottom>
-        Deep Sky Objects for {new Date(observatoryPosition.date).toDateString()}
-      </Typography>
-      {Object.keys(objectTypes).map((object, i) => (
-        <Button
-          style={{ fontSize: "12px", fontWeight: 700 }}
-          onClick={handleFilter}
-          key={i}
-        >
-          {object}
-        </Button>
-      ))}
+      <Fade in={true} timeout={1000}>
+        <Typography variant="h4" gutterBottom>
+          Deep Sky Objects for{" "}
+          {new Date(observatoryPosition.date).toDateString()}
+        </Typography>
+      </Fade>
+      <Fade in={true} timeout={1000} style={{ transitionDelay: "200ms" }}>
+        <div>
+          {Object.keys(objectTypes).map((object, i) => (
+            <Button
+              style={{ fontSize: "12px", fontWeight: 700 }}
+              onClick={handleFilter}
+              key={i}
+            >
+              {object}
+            </Button>
+          ))}
+        </div>
+      </Fade>
       <p />
       <DSOList
         dsoData={showDSO}

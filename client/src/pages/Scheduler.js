@@ -4,6 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import useScheduler from "../hooks/useScheduler";
+import Fade from "@material-ui/core/Fade";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -20,16 +21,22 @@ export default function Scheduler(props) {
       </RouterLink>
     </div>
   ) : isLoading ? (
-    <div>
-      <Typography variant="h6" gutterBottom>
-        Loading your saved objects...
-      </Typography>
-      <CircularProgress color="primary" />
-    </div>
+    <Fade in={true} timeout={1000}>
+      <div>
+        <Typography variant="h6" gutterBottom>
+          Loading your saved objects...
+        </Typography>
+        <CircularProgress color="primary" />
+      </div>
+    </Fade>
   ) : (
-    <SchedulerTable
-      showData={data}
-      updateDelete={(data) => props.updateDelete(data)}
-    />
+    <Fade in={true} timeout={1000}>
+      <div>
+        <SchedulerTable
+          showData={data}
+          updateDelete={(data) => props.updateDelete(data)}
+        />
+      </div>
+    </Fade>
   );
 }

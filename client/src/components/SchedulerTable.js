@@ -60,11 +60,10 @@ const columns = [
 
 export default function SchedulerTable(props) {
   const classes = useStyles();
-  const [showData, setShowData] = useState(props.showData);
   const [checkedItem, setCheckedItem] = useState();
   const [pageSize, setPageSize] = useState(5);
 
-  const rows = showData.map((dso, i) => ({
+  const rows = props.showData.map((dso, i) => ({
     id: dso.name,
     type: dso.type,
     ra: dso.ra,
@@ -79,10 +78,10 @@ export default function SchedulerTable(props) {
   };
 
   const handleDelete = () => {
-    const newShowData = showData.filter((dso) =>
+    const newShowData = props.showData.filter((dso) =>
       checkedItem.every((item) => item !== dso.name)
     );
-    setShowData(newShowData);
+    // setShowData(newShowData);
     const dsoNameOnly = newShowData.map((dso) => dso.params);
     props.updateDelete(dsoNameOnly);
   };
@@ -115,7 +114,7 @@ export default function SchedulerTable(props) {
         <Typography variant="h6" className={classes.chartTitle} gutterBottom>
           Elevation of selected objects
         </Typography>
-        <SchedulerChart schedulerData={showData} />
+        <SchedulerChart schedulerData={props.showData} />
       </Paper>
     </div>
   );

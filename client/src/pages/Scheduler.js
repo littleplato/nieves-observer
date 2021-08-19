@@ -32,6 +32,7 @@ export default function Scheduler(props) {
   ) : (
     <Fade in={true} timeout={1000}>
       <div>
+        {/* {JSON.stringify(data)} */}
         <SchedulerTable
           showData={data}
           updateDelete={(data) => props.updateDelete(data)}

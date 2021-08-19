@@ -1,40 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
 import { useParams } from "react-router-dom";
 import ObjectDetails from "../components/ObjectDetails";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import useObject from "../hooks/useObject";
 import dotenv from "dotenv";
 dotenv.config();
 
 export default function Objects({ addToScheduler }) {
   const params = useParams();
-  const [objectShow, setObjectShow] = useState(null);
+  const objectParams = params.objectID;
   const [observatoryPosition] = useAtom(observatoryPositionAtom);
+  const { data, isLoading } = useObject(objectParams);
 
-  useEffect(() => {
-    // setObjectShow(null);
-    const objectParams = params.objectID;
-    const fetchObjectDetails = async () => {
-      const res = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/dso/${objectParams}`,
-        {
-          method: "POST",
-          body: JSON.stringify(observatoryPosition),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const objectData = await res.json();
-      console.log("fetched individual object data", objectData);
-      setObjectShow(objectData);
-    };
-    fetchObjectDetails();
-  }, [observatoryPosition, params.objectID]);
-
-  return objectShow === null ? (
+  return isLoading ? (
     <>
       <Typography variant="h5" gutterBottom>
         Retrieving details of your object...{" "}
@@ -43,7 +24,7 @@ export default function Objects({ addToScheduler }) {
     </>
   ) : (
     <ObjectDetails
-      objectShow={objectShow}
+      objectShow={data}
       observatoryPosition={observatoryPosition}
       addToScheduler={(data) => addToScheduler(data)}
     />

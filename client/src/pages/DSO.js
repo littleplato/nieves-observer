@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
-import DSOList from "../components/DSOList";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import React, { useState } from "react";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
+import Button from "@material-ui/core/Button";
+import LoadingRows from "../components/LoadingRows";
+import DSORow from "../components/DSORow";
 import Fade from "@material-ui/core/Fade";
+import Typography from "@material-ui/core/Typography";
+
+import useLanding from "../hooks/useLanding";
+import useDSOFilter from "../hooks/useDSOFilter";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,52 +20,79 @@ const objectTypes = {
   "globular clusters": "Globular cluster",
   "open clusters": "Open cluster",
   asterisms: "Asterism",
-  // "supernova remnants": "Supernova remnant",
 };
 
-export default function DSO(props) {
-  const [observatoryPosition] = useAtom(observatoryPositionAtom);
-  const [showDSO, setShowDSO] = useState({ state: "loading" });
+const pageRender = (data, isLoading, props) => {
+  return (
+    <div>
+      {isLoading ? (
+        <Fade in={true} timeout={1000}>
+          <div>
+            <LoadingRows />
+            <LoadingRows />
+            <LoadingRows />
+          </div>
+        </Fade>
+      ) : (
+        <Fade in={true} timeout={1000}>
+          <div>
+            {data.map((dso, i) => (
+              <DSORow
+                dso={dso}
+                key={i}
+                addToScheduler={(selected) => props.addToScheduler(selected)}
+              />
+            ))}
+          </div>
+        </Fade>
+      )}
+    </div>
+  );
+};
 
-  useEffect(() => {
-    setShowDSO({ state: "loading" });
-    const fetchDSO = async () => {
-      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/dso", {
-        method: "POST",
-        body: JSON.stringify(observatoryPosition),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log("Fetching for DSO", data);
-      setShowDSO(data);
-    };
-    fetchDSO();
-  }, [observatoryPosition]);
+function QueryLanding(props) {
+  const { data, isLoading } = useLanding();
+
+  return pageRender(data, isLoading, props);
+}
+
+function QueryFilter(props) {
+  const { data, isLoading } = useDSOFilter(props.selectedType);
+
+  return (
+    <div>
+      {isLoading ? (
+        <Fade in={true} timeout={1000}>
+          <div>
+            <LoadingRows />
+            <LoadingRows />
+            <LoadingRows />
+          </div>
+        </Fade>
+      ) : (
+        <Fade in={true} timeout={1000}>
+          <div>
+            {data.map((dso, i) => (
+              <DSORow
+                dso={dso}
+                key={i}
+                addToScheduler={(selected) => props.addToScheduler(selected)}
+              />
+            ))}
+          </div>
+        </Fade>
+      )}
+    </div>
+  );
+}
+
+export default function DSO(props) {
+  const [filterDSO, setFilterDSO] = useState(null);
+  const [observatoryPosition] = useAtom(observatoryPositionAtom);
 
   const handleFilter = (e) => {
-    setShowDSO({ state: "loading" });
-    const selectedType = objectTypes[e.target.lastChild.data];
-    const refetchFilteredDSO = async () => {
-      const res = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/dso/filter",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            ...observatoryPosition,
-            dso_type: selectedType,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await res.json();
-      console.log(`Server has yielded for ${selectedType}`, data);
-      setShowDSO(data);
-    };
-    refetchFilteredDSO();
+    console.log("filtering for", objectTypes[e.target.lastChild.data]);
+    setFilterDSO(objectTypes[e.target.lastChild.data]);
   };
 
   return (
@@ -85,10 +117,16 @@ export default function DSO(props) {
         </div>
       </Fade>
       <p />
-      <DSOList
-        dsoData={showDSO}
-        addToScheduler={(selected) => props.addToScheduler(selected)}
-      />
+      {filterDSO === null ? (
+        <QueryLanding
+          addToScheduler={(selected) => props.addToScheduler(selected)}
+        />
+      ) : (
+        <QueryFilter
+          selectedType={filterDSO}
+          addToScheduler={(selected) => props.addToScheduler(selected)}
+        />
+      )}
     </div>
   );
 }

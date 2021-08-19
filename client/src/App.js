@@ -10,7 +10,6 @@ import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 import Objects from "./pages/Objects";
 import SearchResults from "./pages/SearchResults";
-import QueryTest from "./pages/QueryTest";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -132,9 +131,6 @@ function App() {
               observatoryPosition={observatoryPosition}
               addToScheduler={addToScheduler}
             />
-          </Route>
-          <Route path="/querytest">
-            <QueryTest />
           </Route>
         </Switch>
       </SideNav>

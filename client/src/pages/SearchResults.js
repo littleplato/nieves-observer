@@ -15,7 +15,7 @@ export default function SearchResults(props) {
   const classes = useStyles();
   const searchShow = props.searchResults;
 
-  return searchShow.state === "loading" ? (
+  return props.searchState ? (
     <>
       Searching for your object...
       <p />

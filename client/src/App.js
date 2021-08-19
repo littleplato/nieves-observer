@@ -10,6 +10,7 @@ import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 import Objects from "./pages/Objects";
 import SearchResults from "./pages/SearchResults";
+import useSearch from "./hooks/useSearch";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -31,8 +32,8 @@ function App() {
   const existingSchedulerData =
     JSON.parse(localStorage.getItem("savedSchedule")) ?? [];
   const [schedulerData, setSchedulerData] = useState(existingSchedulerData);
-  const [searchResults, setSearchResults] = useState({ state: "loading" });
   const [searchTerm, setSearchTerm] = useState();
+  const { data, isLoading } = useSearch(searchTerm);
 
   const theme = createTheme({
     palette: {
@@ -72,21 +73,7 @@ function App() {
   };
 
   const handleSearch = (searchInput) => {
-    setSearchResults({ state: "loading" });
-    const fetchSearchResults = async () => {
-      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/search", {
-        method: "POST",
-        body: JSON.stringify({ search: searchInput }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const searchData = await res.json();
-      console.log("Sever has yielded for", searchInput, searchData);
-      setSearchResults(searchData);
-      setSearchTerm(searchInput);
-    };
-    fetchSearchResults();
+    setSearchTerm(searchInput);
     history.push("/search");
   };
 
@@ -121,7 +108,8 @@ function App() {
           </Route>
           <Route path="/search">
             <SearchResults
-              searchResults={searchResults}
+              searchState={isLoading}
+              searchResults={data}
               searchTerm={searchTerm}
               addToScheduler={addToScheduler}
             />

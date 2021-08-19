@@ -24,7 +24,7 @@ export default function SearchResults(props) {
         <CircularProgress />
       </div>
     </Fade>
-  ) : searchShow.length > 0 ? (
+  ) : searchShow?.length > 0 ? (
     <Fade in={true} timeout={1000}>
       <div className={classes.root}>
         <Typography variant="h5" gutterBottom>

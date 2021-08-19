@@ -4,10 +4,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 import CardHeader from "@material-ui/core/CardHeader";
-import ExoplanetAltChart from "./ExoplanetAltChart";
-import ExoplanetDepthChart from "./ExoplanetDepthChart";
+// import ExoplanetAltChart from "./ExoplanetAltChart";
+// import ExoplanetDepthChart from "./ExoplanetDepthChart";
 
 const cardHeight = 180;
 
@@ -24,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 0 auto",
-    marginTop: -7,
-    marginBottom: -13,
   },
   cover: {
     width: 250,
@@ -48,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExoplanetRow({ dummyData }) {
+export default function ExoplanetRow({ exoplanet }) {
   const classes = useStyles();
 
   return (
@@ -56,29 +54,29 @@ export default function ExoplanetRow({ dummyData }) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={9}>
           <Card className={classes.root}>
-            <div className={classes.cover}>
-              <ExoplanetDepthChart plot={dummyData.plot} />
-            </div>
+            {/* <div className={classes.cover}>
+              <ExoplanetDepthChart plot={plot_data} />
+            </div> */}
             <div className={classes.details}>
               <CardHeader
-                title={dummyData.name}
-                subheader={`Transit Date: ${dummyData.date}`}
+                title={exoplanet.planet}
+                subheader={`Transit Date: ${exoplanet.date.slice(0, 10)}`}
                 className={classes.header}
               />
               <CardContent className={classes.content}>
-                <Grid container spacing={4}>
+                <Grid container spacing={2}>
                   <Grid item xs={6} sm={6}>
                     <Typography variant="subtitle2" color="textSecondary">
-                      V Mag: {dummyData.mag} <br />
-                      RA: {dummyData.ra} <br />
-                      Dec: {dummyData.dec} <br />
+                      V Mag: {exoplanet.mag} <br />
+                      RA: {exoplanet.ra} <br />
+                      Dec: {exoplanet.dec} <br />
                     </Typography>
                   </Grid>
                   <Grid item xs={6} sm={6}>
                     <Typography variant="subtitle2" color="textSecondary">
-                      Ingress: {dummyData.ingress} <br />
-                      Exgress: {dummyData.exgress} <br />
-                      Period: {dummyData.period} hours <br />
+                      Ingress: {exoplanet.ingress_date.slice(11, 22)} <br />
+                      Exgress: {exoplanet.exgress_date.slice(11, 22)} <br />
+                      Period: {exoplanet.period.slice(0, 4)} hours <br />
                     </Typography>
                   </Grid>
                 </Grid>
@@ -87,9 +85,9 @@ export default function ExoplanetRow({ dummyData }) {
           </Card>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Paper className={classes.chart}>
-            <ExoplanetAltChart plot={dummyData.plot} />
-          </Paper>
+          {/* <Paper className={classes.chart}>
+            <ExoplanetAltChart plot={exoplanet.plot} />
+          </Paper> */}
         </Grid>
       </Grid>
     </div>

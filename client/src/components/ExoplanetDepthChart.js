@@ -23,15 +23,17 @@ export default function ExoplanetDepthChart(props) {
         margin={{
           top: 20,
           right: 10,
-          left: -13,
+          left: -35,
           bottom: -5,
         }}
       >
         <CartesianGrid stroke={darkMode ? "#777B7E" : "#D9DDDC"} />
-        <XAxis dataKey="name" tick={false} />
+        <XAxis dataKey="time" tick={false} />
         <YAxis
           stroke={darkMode ? "#b0bec5" : "#546e7a"}
-          tick={{ fontSize: 10 }}
+          // tick={{ fontSize: 10 }}
+          domain={[props.plot[3].mag * 0.999, props.plot[0].mag * 1.001]}
+          tick={false}
         />
         <Tooltip
           contentStyle={{
@@ -41,7 +43,7 @@ export default function ExoplanetDepthChart(props) {
         />
         <Line
           type="monotone"
-          dataKey="pv"
+          dataKey="mag"
           stroke={darkMode ? "#D9DDDC" : "#777B7E"}
           dot={false}
         />

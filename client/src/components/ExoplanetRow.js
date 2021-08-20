@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 // import Paper from "@material-ui/core/Paper";
 import CardHeader from "@material-ui/core/CardHeader";
 // import ExoplanetAltChart from "./ExoplanetAltChart";
-// import ExoplanetDepthChart from "./ExoplanetDepthChart";
+import ExoplanetDepthChart from "./ExoplanetDepthChart";
 
 const cardHeight = 180;
 
@@ -54,9 +54,11 @@ export default function ExoplanetRow({ exoplanet }) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={9}>
           <Card className={classes.root}>
-            {/* <div className={classes.cover}>
-              <ExoplanetDepthChart plot={plot_data} />
-            </div> */}
+            <div className={classes.cover}>
+              <ExoplanetDepthChart
+                plot={JSON.parse(exoplanet.transit_plot.replaceAll("'", '"'))}
+              />
+            </div>
             <div className={classes.details}>
               <CardHeader
                 title={exoplanet.planet}

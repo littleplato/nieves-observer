@@ -32,9 +32,9 @@ export default function ExoplanetList() {
     <div>
       <Typography gutterBottom>
         As it is computationally intensive to calculate the viewability of
-        transits, it may take up to a minute for the server to load the results.
+        transits, it may take up to a minute for the server to calculate the
+        results.
         <br />
-        Thank you for your patience.
       </Typography>
       <CircularProgress />
     </div>

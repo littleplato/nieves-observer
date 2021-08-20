@@ -3,7 +3,8 @@ import { useQuery } from "react-query";
 import { useAtom } from "jotai";
 import { observatoryPositionAtom } from "../App";
 import ExoplanetRow from "./ExoplanetRow";
-import LoadingRows from "./LoadingRows";
+import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -29,9 +30,13 @@ export default function ExoplanetList() {
 
   return isLoading ? (
     <div>
-      <p />
-      <LoadingRows />
-      <LoadingRows />
+      <Typography gutterBottom>
+        As it is computationally intensive to calculate the viewability of
+        transits, it may take up to a minute for the server to load the results.
+        <br />
+        Thank you for your patience.
+      </Typography>
+      <CircularProgress />
     </div>
   ) : (
     data.map((exoplanet) => (

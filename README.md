@@ -38,9 +38,8 @@ The logic of the app rests on the algorithms in the server. The altitude and air
 ```shell
 from astropy.time import Time
 import astropy.units as u
-from astropy.coordinates import EarthLocation
-from astropy.coordinates import SkyCoord
-from astroplan import Observer
+from astropy.coordinates import EarthLocation, SkyCoord
+from astroplan import Observer, FixedTarget
 
 location = EarthLocation.from_geodetic(latitude*u.deg, longitude*u.deg)
 observatory = Observer(location=location, name="observatory")

@@ -112,6 +112,8 @@ export default function SideNav(props) {
               onClick={() => {
                 console.log("github");
               }}
+              href="https://github.com/weejerrick/nieves-observer"
+              target="_blank"
             >
               <GitHubIcon />
             </IconButton>
@@ -174,18 +176,17 @@ export default function SideNav(props) {
               <ListItem button key={item.text}>
                 <ListItemIcon className={classes.icon}>
                   {item.icon}
-                  {/* <img src={newMoon} alt={item.text} width={25} /> */}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
             </Link>
           ))}
         </List>
-        {/* <div>About | Contact</div> */}
+
         <div className={classes.footer}>
           <Container>
             <Typography variant="caption" style={{ fontWeight: 800 }}>
-              A full-stack app by Wee Jerrick.
+              {/* A full-stack app by Wee Jerrick */}
             </Typography>
           </Container>
         </div>

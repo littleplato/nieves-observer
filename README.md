@@ -8,7 +8,7 @@ Quickly look up astronomical objects for research and plan your night imaging th
 
 ## Description
 
-This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has informal access to three such observatories housing research-grade optical telescopes:
+This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has formal and informal access to the following observatories housing research-grade optical telescopes:
 
 <img align="left" src="https://i.ibb.co/TrxNDnT/nieves-md.jpg" alt="Nieves Observatory">
 
@@ -33,7 +33,9 @@ The Nieves Observer comes in in Step 2 to help educators and students select val
 
 ## Astronomy
 
-The logic of the app rests on the algorithms in the server. The altitude and airmass plots are generated through a modified snippet from `astroplan`'s source code.
+The algorithms dealing with astronomical and astrometrical calculations are built using the `astroplan` and `astropy` libraries.
+
+E.g., the altitude and airmass plots are generated using a modified snippet from `astroplan`'s source code.
 
 ```shell
 from astropy.time import Time
@@ -41,11 +43,15 @@ import astropy.units as u
 from astropy.coordinates import EarthLocation, SkyCoord
 from astroplan import Observer, FixedTarget
 
-location = EarthLocation.from_geodetic(latitude*u.deg, longitude*u.deg)
-observatory = Observer(location=location, name="observatory")
-time = Time(today) + np.linspace(-12, 12, 24)*u.hour
-object_attributes = FixedTarget(name=name, coord=SkyCoord(ra, dec, frame='icrs'))
-altitude = observatory.altaz(time, object_attributes).alt.degree
+def altitude_plot(latitude, longitude, astro_object):
+    location = EarthLocation.from_geodetic(latitude*u.deg, longitude*u.deg)
+    observatory = Observer(location=location, name="observatory")
+    time = Time(today) + np.linspace(-12, 12, 24)*u.hour
+    object_attributes = FixedTarget(name=name, coord=SkyCoord(ra, dec, frame='icrs'))
+    altitude = observatory.altaz(time, object_attributes).alt.degree
+    plot = [{"alt": f'{y:.2f}', "time": x.plot_date}
+                             for x, y in zip(time, altitude)]
+    return plot
 ```
 
 ## Development

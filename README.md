@@ -46,11 +46,12 @@ from astroplan import Observer, FixedTarget
 def altitude_plot(latitude, longitude, astro_object):
     location = EarthLocation.from_geodetic(latitude*u.deg, longitude*u.deg)
     observatory = Observer(location=location, name="observatory")
-    time = Time(today) + np.linspace(-12, 12, 24)*u.hour
-    object_attributes = FixedTarget(name=name, coord=SkyCoord(ra, dec, frame='icrs'))
-    altitude = observatory.altaz(time, object_attributes).alt.degree
+    timespan = Time(today) + np.linspace(-12, 12, 24)*u.hour
+    object_attributes = FixedTarget(name=astro_object.name,
+                            coord=SkyCoord(astro_object.ra, astro_object.dec, frame='icrs'))
+    altitude = observatory.altaz(timespan, object_attributes).alt.degree
     plot = [{"alt": f'{y:.2f}', "time": x.plot_date}
-                             for x, y in zip(time, altitude)]
+                             for x, y in zip(timespan, altitude)]
     return plot
 ```
 

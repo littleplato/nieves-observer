@@ -1,4 +1,4 @@
-<img src="https://i.ibb.co/17rkNKG/logo192.png" alt="Logo of the project" align="right">
+<img src="https://i.ibb.co/17rkNKG/logo192.png" alt="Nieves Observer" align="right">
 
 # Nieves Observer
 
@@ -10,18 +10,17 @@ Quickly look up astronomical objects for research and plan your night imaging th
 
 This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has informal access to three such observatories housing research-grade optical telescopes:
 
-#### Nieves Observatory
+### Nieves Observatory
 
-<img align="left" src="https://i.ibb.co/TrxNDnT/nieves-md.jpg">
-The Nieves Observatory is based in California and was built in 2019 housing a 0.3m CDK optical telescope. The observatory is owned by the Soka University of America, funded by the Nieves Family Foundation.
+  <img align="left" src="https://i.ibb.co/TrxNDnT/nieves-md.jpg" alt="Nieves Observatory"> 
+The Nieves Observatory is based in California and was built in 2019 housing a 0.3m CDK optical telescope. The telescope is equipped with a research-grade FLI camera and a filter wheel with both broad-band (Sloan) and narrow-band filters. The observatory is owned by the Soka University of America, funded by the Nieves Family Foundation.
 
-#### Las Campanas Remote Observatory (LCRO)
+### Las Campanas Remote Observatory (LCRO)
 
-<img align="left" src="https://i.ibb.co/jLZzBq0/lcro-md.jpg">
+  <img align="left" src="https://i.ibb.co/jLZzBq0/lcro-md.jpg" alt="LCRO"> 
+The LCRO sits on top the mountains of Chile's Atacama Desert, housing an almost-identical 0.3m CDK optical telescope. The LCRO is a joint project of the LCO, Astro Physics Corporation, Finger Lakes Instruments, Mike Long, Dave Jurasevich, and SSC Observatories.
 
-Las Campanas Remote Observatory, Atacama, Chile
-
-###
+---
 
 The app is part of a larger pipeline that includes:
 

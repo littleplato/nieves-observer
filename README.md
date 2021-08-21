@@ -10,16 +10,25 @@ Quickly look up astronomical objects for research and plan your night imaging th
 
 This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has informal access to three such observatories housing research-grade optical telescopes:
 
-1. Nieves Observatory, CA, USA
-1. Las Campanas Remote Observatory, Atacama, Chile
-1. Great Basin Observatory, NV, USA
+#### Nieves Observatory
+
+<img align="left" src="https://i.ibb.co/TrxNDnT/nieves-md.jpg">
+The Nieves Observatory is based in California and was built in 2019 housing a 0.3m CDK optical telescope. The observatory is owned by the Soka University of America, funded by the Nieves Family Foundation.
+
+#### Las Campanas Remote Observatory (LCRO)
+
+<img align="left" src="https://i.ibb.co/jLZzBq0/lcro-md.jpg">
+
+Las Campanas Remote Observatory, Atacama, Chile
+
+###
 
 The app is part of a larger pipeline that includes:
 
 1. Getting access to telescopes
 1. Learning to operate the telescopes
 1. Reducing and manipulating the images from the observatories
-1. Analysing and obtaining research results from the images
+1. Obtaining and analysing research results from the images
 
 The Nieves Observer comes in in Step 2 to help educators and students select valuable target to reduce time wastage on the telescopes.
 
@@ -90,7 +99,10 @@ object_attributes = FixedTarget(name=name, coord=SkyCoord(ra, dec, frame='icrs')
 altitude = observatory.altaz(time, object_attributes).alt.degree
 ```
 
-## Acknowledgements
+## Astronomical Data
+
+The detailed astronomical data is obtained from [Dr. Wolfgang Steinicke's catalogue](http://www.klima-luft.de/steinicke/ngcic/ngcic_e.htm) of NGCIC and Messier objects.
+Images are web scrapped from Wikipedia, which were themselves scrapped mostly from NASA & ESO/Hubble.
 
 ## Licensing
 

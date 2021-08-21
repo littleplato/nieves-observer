@@ -4,7 +4,24 @@
 
 > An observation planner for the Nieves Observatory
 
-Quickly look up astronomical objects for research. The Nieves Observer is a full-stack web application designed for the Nieves Observatory for astronomical research and education.
+Quickly look up astronomical objects for research and plan your night imaging the objects. The Nieves Observer is a full-stack web application designed for the Nieves Observatory for astronomical research and education.
+
+## Description
+
+This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has informal access to three such observatories housing research-grade optical telescopes:
+
+1. Nieves Observatory, CA, USA
+1. Las Campanas Remote Observatory, Atacama, Chile
+1. Great Basin Observatory, NV, USA
+
+The app is part of a larger pipeline that includes:
+
+1. Getting access to telescopes
+1. Learning to operate the telescopes
+1. Reducing and manipulating the images from the observatories
+1. Analysing and obtaining research results from the images
+
+The Nieves Observer comes in in Step 2 to help educators and students select valuable target to reduce time wastage on the telescopes.
 
 ## Development
 
@@ -72,6 +89,8 @@ time = Time(today) + np.linspace(-12, 12, 24)*u.hour
 object_attributes = FixedTarget(name=name, coord=SkyCoord(ra, dec, frame='icrs'))
 altitude = observatory.altaz(time, object_attributes).alt.degree
 ```
+
+## Acknowledgements
 
 ## Licensing
 

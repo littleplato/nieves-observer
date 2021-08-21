@@ -8,7 +8,7 @@ Quickly look up astronomical objects for research and plan your night imaging th
 
 ## Description
 
-This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happening) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has formal and informal access to the following observatories housing research-grade optical telescopes:
+This project is part of the upcoming "GROWTH (Global Relay of Watching Transients Happen) for undergraduates" programme. The project aims to equip astronomy undergraduates around the world with hands-on research skills using remotely-operated telescopes around world. The project right now has formal and informal access to the following observatories housing research-grade optical telescopes:
 
 <img align="left" src="https://i.ibb.co/TrxNDnT/nieves-md.jpg" alt="Nieves Observatory">
 
@@ -60,9 +60,9 @@ def altitude_plot(latitude, longitude, astro_object):
 ### Built With
 
 1. PostgreSQL
-1. Python (general): BeautifulSoup, pandas, astropy, astroplan, numpy, psycopg2
-1. Flask: flask-restful, flask-sqlalchemy
-1. React: Jotai, React Query, react-router, Recharts, Material-UI
+1. Python (general): BeautifulSoup, pandas, Astropy, astroplan, NumPy, Psycopg 2
+1. Flask: Flask-RESTful, Flask-SQLAlchemy
+1. React: Jotai, React Query, React Router, Recharts, Material-UI
 
 ### Prerequisites
 
@@ -74,11 +74,11 @@ def altitude_plot(latitude, longitude, astro_object):
 
 ## Setting Up Dev
 
-Set up the system locally by installing the requisite packages for the server and client.
+To develop the app, install the requisite libraries for the server and client locally.
 
 ### Server
 
-The server is built in Flask, and developing the app in an environment using `pipenv` is recommended.
+The server is built using `Flask`, and developing the app in an environment (e.g. `pipenv`) is recommended.
 
 ```shell
 git clone https://github.com/weejerrick/nieves-observer.git
@@ -87,7 +87,7 @@ pipenv shell
 pipenv install -r requirements.txt
 ```
 
-For the app to work as intended, your Postgres has to be seeded with initial data. The schema for the SQL table can be found in the Flask app.
+For the app to work as intended, your `Postgres` has to be seeded with initial data. The schemas for the SQL tables can be found in the `Flask` app.
 
 ### Client
 
@@ -102,13 +102,14 @@ The server url is hidden on a `.env` file. Create a `.env` and add a variable `R
 
 ```shell
 touch .env
-echo "REACT_APP_SERVER_URL=localhost:/5000" >> .env
+echo "REACT_APP_SERVER_URL=http://localhost:5000/" >> .env
 ```
 
 ## Astronomical Data
 
-The detailed astronomical data is obtained from [Dr. Wolfgang Steinicke's catalogue](http://www.klima-luft.de/steinicke/ngcic/ngcic_e.htm) of NGCIC and Messier objects.
-Images are web scrapped from Wikipedia, which were themselves scrapped mostly from NASA & ESO/Hubble.
+The detailed astronomical data are obtained from [Dr. Wolfgang Steinicke's catalogue](http://www.klima-luft.de/steinicke/ngcic/ngcic_e.htm) of NGC/IC and Messier objects.
+The deep-sky objects' images are web scrapped from Wikipedia, which were themselves scrapped mostly from NASA & ESO/Hubble.
+Exoplanet data are obtained from the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/).
 
 ## Licensing
 

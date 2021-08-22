@@ -69,6 +69,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 3,
     paddingBottom: 15,
   },
+  icon: {
+    minWidth: 35,
+  },
+  options: {
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
 }));
 
 const navObjects = [

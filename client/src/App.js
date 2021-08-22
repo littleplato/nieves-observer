@@ -3,7 +3,7 @@ import { atom, useAtom } from "jotai";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
-import SideNav from "./components/SideNav";
+import ResNav from "./components/ResNav";
 import Scheduler from "./pages/Scheduler";
 import Exoplanets from "./pages/Exoplanets";
 import EclipsingBinaries from "./pages/EclipsingBinaries";
@@ -38,6 +38,10 @@ function App() {
   const theme = createTheme({
     palette: {
       type: darkMode ? "dark" : "light",
+      background: {
+        default: darkMode ? "#212121" : "#f5f5f5",
+        paper: darkMode ? "#303030" : "#fafafa",
+      },
       primary: { main: darkMode ? "#90a4ae" : "#455a64" },
     },
     typography: {
@@ -80,7 +84,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <SideNav
+      <ResNav
         darkMode={darkMode}
         selectMode={(mode) => setDarkMode(mode)}
         locationSelection={locationSelection}
@@ -121,7 +125,7 @@ function App() {
             />
           </Route>
         </Switch>
-      </SideNav>
+      </ResNav>
     </ThemeProvider>
   );
 }

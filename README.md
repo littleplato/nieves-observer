@@ -33,9 +33,9 @@ The Nieves Observer comes in in Step 2 to help educators and students select val
 
 ## Astronomy
 
-The algorithms dealing with astronomical and astrometrical calculations are built using the `astroplan` and `astropy` libraries.
+The algorithms dealing with astronomical and astrometrical calculations are built using the astroplan and Astropy libraries.
 
-E.g., the altitude and airmass plots are generated using a modified snippet from `astroplan`'s source code.
+E.g., the altitude and airmass plots are generated using a modified snippet from astroplan's source code.
 
 ```shell
 from astropy.time import Time
@@ -78,7 +78,7 @@ To develop the app, install the requisite libraries for the server and client lo
 
 ### Server
 
-The server is built using `Flask`, and developing the app in an environment (e.g. `pipenv`) is recommended.
+The server is built using Flask, and developing the app in an environment (e.g. Pipenv) is recommended.
 
 ```shell
 git clone https://github.com/weejerrick/nieves-observer.git
@@ -87,7 +87,7 @@ pipenv shell
 pipenv install -r requirements.txt
 ```
 
-For the app to work as intended, your `Postgres` has to be seeded with initial data. The schemas for the SQL tables can be found in the `Flask` app.
+For the app to work as intended, your Postgres database has to be seeded with initial data. The schemas for the SQL tables can be found in the Flask app.
 
 ### Client
 
@@ -107,8 +107,8 @@ echo "REACT_APP_SERVER_URL=http://localhost:5000/" >> .env
 
 ## Astronomical Data
 
-The detailed astronomical data are obtained from [Dr. Wolfgang Steinicke's catalogue](http://www.klima-luft.de/steinicke/ngcic/ngcic_e.htm) of NGC/IC and Messier objects.
-The deep-sky objects' images are web scrapped from Wikipedia, which were themselves scrapped mostly from NASA & ESO/Hubble.
+The detailed astronomical data are obtained from [Dr. Wolfgang Steinicke's catalogue](http://www.klima-luft.de/steinicke/ngcic/ngcic_e.htm) of NGC/IC and Messier objects.\
+The deep-sky objects' images are web scrapped from Wikipedia, which were themselves scrapped mostly from NASA & ESO/Hubble.\
 Exoplanet data are obtained from the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/).
 
 ## Licensing

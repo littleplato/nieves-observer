@@ -187,6 +187,9 @@ export default function About() {
           .
         </Typography>
       </div>
+
+      <p />
+      <em>Last Updated: 25 Sep 2021</em>
     </div>
   );
 }

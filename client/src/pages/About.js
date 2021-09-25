@@ -23,7 +23,8 @@ export default function About() {
           The Nieves Observer
         </Typography>
         <Typography variant="p" className={classes.reading}>
-          For the uninitiated, this app solves a pesky problem in astronomy of
+          For the uninitiated, this app solves a pesky problem in astronomy
+          known as
           <strong> target selection</strong>. With observatories’ remote
           capabilities, students have almost infinite time access to these
           research-grade telescopes. This is excellent, but it is a tedious
@@ -49,8 +50,17 @@ export default function About() {
               mechanical processes, and understanding the astrophysical
               compositions of objects. The app lists the DSOs that are available
               in the sky for a given night. For a quick introduction to
-              astronomical objects, please visit A Brief Guide to Astronomical
-              Objects.
+              astronomical objects, please visit{" "}
+              <a
+                href="https://sites.soka.edu/SUO/astronomy-guide/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Typography variant="p" color="primary">
+                  A Brief Guide to Astronomical Objects
+                </Typography>
+              </a>
+              .
             </li>
             <p />
             <li>
@@ -59,7 +69,17 @@ export default function About() {
               students to time-series photometry, which is the measurement of
               brightness over time of an object—their first step into “legit”
               astrophysics. The app lists the exoplanet hosts that have
-              exoplanets transiting for a given night.
+              exoplanets transiting for a given night. See an example of{" "}
+              <a
+                href="https://colab.research.google.com/drive/10lUyjmN9521U8t7vpVZkILUQ5etAPHoH?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Typography variant="p" color="primary">
+                  time-series photometric reduction
+                </Typography>
+              </a>{" "}
+              using data from the LCRO.
             </li>
             <p />
             <li>

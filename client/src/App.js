@@ -10,6 +10,7 @@ import EclipsingBinaries from "./pages/EclipsingBinaries";
 import DSO from "./pages/DSO";
 import Objects from "./pages/Objects";
 import SearchResults from "./pages/SearchResults";
+import About from "./pages/About";
 import useSearch from "./hooks/useSearch";
 import dotenv from "dotenv";
 dotenv.config();
@@ -97,6 +98,9 @@ function App() {
               addToScheduler={addToScheduler}
               observatoryPosition={observatoryPosition}
             />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
           <Route path="/scheduler">
             <Scheduler

@@ -201,7 +201,7 @@ function ResNav(props) {
               }}
               component={RouterLink}
               color="inherit"
-              to="/scheduler"
+              to="/about"
             >
               <HelpIcon />
             </IconButton>

@@ -28,6 +28,7 @@ import TollIcon from "@material-ui/icons/Toll";
 import BubbleChartIcon from "@material-ui/icons/BubbleChart";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import MenuIcon from "@material-ui/icons/Menu";
+import HelpIcon from "@material-ui/icons/Help";
 
 const drawerWidth = 240;
 
@@ -76,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 10,
     paddingBottom: 20,
   },
+  footer: {
+    position: "fixed",
+    bottom: 0,
+    textAlign: "center",
+    paddingBottom: 12,
+  },
 }));
 
 const navObjects = [
@@ -114,7 +121,6 @@ function ResNav(props) {
         />
       </Link>
 
-      <div />
       <div className={classes.options}>
         <Container>
           <Location
@@ -146,13 +152,13 @@ function ResNav(props) {
         ))}
       </List>
 
-      <div className={classes.footer}>
+      {/* <div className={classes.footer}>
         <Container>
           <Typography variant="caption" style={{ fontWeight: 800 }}>
-            {/* A full-stack app by Wee Jerrick */}
+            A full-stack app by Wee Jerrick
           </Typography>
         </Container>
-      </div>
+      </div> */}
     </>
   );
 
@@ -188,6 +194,19 @@ function ResNav(props) {
               Scheduler
             </Link>
           </Typography>
+          <Tooltip title="About this app">
+            <IconButton
+              onClick={() => {
+                console.log("About");
+              }}
+              component={RouterLink}
+              color="inherit"
+              to="/scheduler"
+            >
+              <HelpIcon />
+            </IconButton>
+          </Tooltip>
+
           <Tooltip title="See source on GitHub">
             <IconButton
               onClick={() => {
@@ -199,6 +218,7 @@ function ResNav(props) {
               <GitHubIcon />
             </IconButton>
           </Tooltip>
+
           <Tooltip title="Toggle light/dark mode">
             <IconButton onClick={() => props.selectMode(!props.darkMode)}>
               {props.darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
@@ -207,7 +227,7 @@ function ResNav(props) {
           <SearchBar handleSearch={(data) => props.handleSearch(data)} />
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer

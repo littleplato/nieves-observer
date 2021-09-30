@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { atom, useAtom } from "jotai";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import ResNav from "./components/ResNav";
@@ -129,9 +129,8 @@ function App() {
               addToScheduler={addToScheduler}
             />
           </Route>
-          <Route path="/404">
-            <Lost404 />
-          </Route>
+          <Route path="/404" component={Lost404} />
+          <Redirect from="*" to="/404" />
         </Switch>
       </ResNav>
     </ThemeProvider>

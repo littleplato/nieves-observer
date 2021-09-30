@@ -12,6 +12,7 @@ import Objects from "./pages/Objects";
 import SearchResults from "./pages/SearchResults";
 import About from "./pages/About";
 import useSearch from "./hooks/useSearch";
+import Lost404 from "./components/Lost404";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -127,6 +128,9 @@ function App() {
               observatoryPosition={observatoryPosition}
               addToScheduler={addToScheduler}
             />
+          </Route>
+          <Route path="/404">
+            <Lost404 />
           </Route>
         </Switch>
       </ResNav>

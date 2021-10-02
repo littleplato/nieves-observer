@@ -37,7 +37,7 @@ The algorithms dealing with astronomical and astrometrical calculations are buil
 
 E.g., the altitude and airmass plots are generated using a modified snippet from astroplan's source code.
 
-```shell
+```python
 from astropy.time import Time
 import astropy.units as u
 from astropy.coordinates import EarthLocation, SkyCoord

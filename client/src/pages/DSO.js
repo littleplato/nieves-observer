@@ -93,19 +93,12 @@ export default function DSO(props) {
     setFilterDSO(objectTypes[e.target.lastChild.data]);
   };
 
-  // let dateToday = new Date(observatoryPosition.date).toDateString();
-  // if (Number.isNaN(dateToday)) {
-  //   let arr = observatoryPosition.date.split(/[- :]/);
-  //   dateToday = new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
-  // }
-
   return (
     <div>
       <Fade in={true} timeout={1000}>
         <Typography variant="h4" gutterBottom>
           Deep Sky Objects for{" "}
           {new Date(observatoryPosition.date).toDateString()}
-          {/* {dateToday} */}
         </Typography>
       </Fade>
       <Fade in={true} timeout={1000}>
